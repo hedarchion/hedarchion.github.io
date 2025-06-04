@@ -10,10 +10,10 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            overscroll-behavior: none; /* Prevents pull-to-refresh on mobile */
+            overscroll-behavior: none; 
         }
         .screen {
-            display: none; /* Hidden by default, shown by JS */
+            display: none; 
             min-height: 100vh;
             width: 100%;
         }
@@ -23,7 +23,6 @@
             align-items: center;
             justify-content: center;
         }
-        /* Card floating animation */
         @keyframes float {
             0% { transform: translateY(0px) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
             50% { transform: translateY(-10px) scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
@@ -35,18 +34,16 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .floating-card:hover {
-            animation-play-state: paused; /* Pause float on hover */
+            animation-play-state: paused; 
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 25px rgba(0,0,0,0.25);
         }
-
-        /* Envelope animation - UPDATED STYLES */
         .envelope {
             position: relative;
-            width: 90%; /* Make it responsive */
-            max-width: 400px; /* Max width for larger screens */
-            height: 280px; /* Increased height */
-            background-color: #FBBF24; /* Amber-400 */
+            width: 90%; 
+            max-width: 400px; 
+            height: 280px; 
+            background-color: #FBBF24; 
             border-radius: 10px;
             cursor: default;
             overflow: hidden; 
@@ -56,8 +53,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 140px; /* Adjusted flap height for new envelope size */
-            background-color: #F59E0B; /* Amber-500 */
+            height: 140px; 
+            background-color: #F59E0B; 
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top center;
             transition: transform 0.8s ease-in-out;
@@ -68,25 +65,25 @@
         }
         .envelope-content {
             position: absolute;
-            top: 10px; /* Start closer to the top, will be covered by flap initially */
+            top: 10px; 
             left: 10px;
             right: 10px;
-            bottom: 10px; /* Use bottom to make it fill available space */
+            bottom: 10px; 
             background-color: white;
-            padding: 20px; /* Increased padding */
+            padding: 20px; 
             border-radius: 5px;
-            text-align: left; /* Changed to left align */
+            text-align: left; 
             opacity: 0;
-            transform: translateY(60px); /* Adjust initial transform for smoother reveal */
+            transform: translateY(60px); 
             transition: opacity 0.5s 0.5s ease-in-out, transform 0.5s 0.5s ease-in-out; 
-            overflow-y: auto; /* Keep scroll for very long text, but area is larger */
-            font-size: 1.1rem; /* Increased font size */
-            line-height: 1.6; /* Improved line spacing */
-            display: flex; /* For centering text vertically if not scrolling */
-            align-items: center; /* For centering text vertically */
-            justify-content: center; /* For centering text horizontally if it's short */
+            overflow-y: auto; 
+            font-size: 1.1rem; 
+            line-height: 1.6; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
         }
-         .envelope-content > div { /* Wrapper for text to allow proper alignment */
+         .envelope-content > div { 
             width: 100%;
         }
         .envelope.open .envelope-content {
@@ -96,7 +93,7 @@
         .countdown-timer {
             font-size: 3rem;
             font-weight: bold;
-            color: #DC2626; /* Red-600 */
+            color: #DC2626; 
         }
         .rating-button {
             transition: transform 0.2s ease, background-color 0.2s ease;
@@ -105,12 +102,11 @@
             transform: scale(1.1);
         }
         .rating-button.selected {
-            background-color: #10B981; /* Green-500 */
+            background-color: #10B981; 
             color: white;
         }
-        /* Custom modal for messages */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             z-index: 100;
             left: 0;
@@ -133,20 +129,20 @@
             text-align: center;
         }
         .modal-close-button {
-            background-color: #3B82F6; /* Blue-500 */
+            background-color: #3B82F6; 
             color: white;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
         }
-        /* Spinner for loading */
-        .spinner {
+        .spinner { /* Kept for potential future use, but hidden by default now */
+            display: none; 
             border: 4px solid rgba(0, 0, 0, 0.1);
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border-left-color: #3B82F6; /* Blue-500 */
+            border-left-color: #3B82F6; 
             animation: spin 1s ease infinite;
         }
         @keyframes spin {
@@ -238,7 +234,7 @@
             <h2 class="text-3xl font-bold text-white text-center mb-6">Isu Anda!</h2>
             <div id="envelope" class="envelope mx-auto mb-6">
                 <div class="envelope-flap"></div>
-                <div class="envelope-content"> <!-- Text wrapper div added in JS -->
+                <div class="envelope-content"> 
                     <div id="issueTextInEnvelope" class="text-gray-700"></div>
                 </div>
             </div>
@@ -261,7 +257,6 @@
                 <h2 class="text-2xl font-bold text-center text-rose-700 mb-6">Nilaikan Prestasi Anda</h2>
                 <p class="text-center text-gray-600 mb-6">Pada skala 1 (Perlu Banyak Peningkatan) hingga 9 (Sangat Cemerlang), sejauh mana anda menilai prestasi anda?</p>
                 <div id="ratingButtonsContainer" class="flex flex-wrap justify-center gap-2 mb-8">
-                    <!-- Rating buttons 1-9 will be populated here -->
                 </div>
                 <button id="submitRatingButton" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Hantar Penilaian</button>
             </div>
@@ -286,7 +281,7 @@
             <div class="bg-white p-8 rounded-lg shadow-md w-full max-h-[90vh] overflow-y-auto">
                 <h2 class="text-2xl font-bold text-emerald-700 mb-6 text-center">Contoh Isi & Perkataan Sukar</h2>
                 <div id="contohIsiContent" class="text-gray-700 space-y-4">
-                    <div id="contohIsiLoading" class="flex justify-center items-center h-32">
+                    <div id="contohIsiLoading" class="flex justify-center items-center h-32" style="display: none;"> <!-- Spinner is now hidden by default -->
                         <div class="spinner"></div>
                         <p class="ml-4 text-emerald-600">Sedang memuatkan contoh...</p>
                     </div>
@@ -326,6 +321,8 @@
         </div>
     </div>
 
+    <!-- Include the static data file BEFORE the main script -->
+    <script src="contoh_isi_data.js"></script> 
 
 <script>
     // --- DOM Elements ---
@@ -351,8 +348,8 @@
     const refreshIssuesButton = document.getElementById('refreshIssuesButton');
     
     const envelopeDiv = document.getElementById('envelope');
-    const envelopeContentDiv = document.querySelector('#envelopeScreen .envelope-content'); // Query specific content div
-    const issueTextInEnvelope = document.getElementById('issueTextInEnvelope'); // This is the inner div for text
+    const envelopeContentDiv = document.querySelector('#envelopeScreen .envelope-content'); 
+    const issueTextInEnvelope = document.getElementById('issueTextInEnvelope'); 
 
     const prepCountdownDisplay = document.getElementById('prepCountdown');
     const prepMessage = document.getElementById('prepMessage');
@@ -370,7 +367,7 @@
     const tamatSimulasiButton = document.getElementById('tamatSimulasiButton');
 
     const contohIsiContent = document.getElementById('contohIsiContent');
-    const contohIsiLoading = document.getElementById('contohIsiLoading');
+    const contohIsiLoading = document.getElementById('contohIsiLoading'); // Will be hidden by default
     const contohIsiText = document.getElementById('contohIsiText');
     const perkataanSukarSection = document.getElementById('perkataanSukarSection');
     const perkataanSukarList = document.getElementById('perkataanSukarList');
@@ -393,7 +390,7 @@
     let gameData = {
         name: '',
         gender: '',
-        role: '', // Moderator or Panelis
+        role: '', 
         currentIssueText: '',
         currentRating: 0,
         roundsPlayed: 0,
@@ -403,7 +400,7 @@
     let prepTimerInterval, speakTimerInterval;
     let bellSound;
 
-    const allIssues = [
+    const allIssues = [ // This list should ideally match keys in staticContohIsiData or have a fallback
         "Tekanan Akademik: Tekanan tinggi untuk cemerlang dalam peperiksaan (contohnya SPM).",
         "Beban Kerja Sekolah yang Berat: Terlalu banyak kerja rumah dan tugasan sekolah.",
         "Sistem Pendidikan Berorientasikan Peperiksaan: Fokus yang berlebihan kepada peperiksaan berbanding pembangunan holistik.",
@@ -507,24 +504,14 @@
 
     // --- Screen Logic ---
 
-    // Screen 1: User Info
     startGameButton.addEventListener('click', () => {
         const name = userNameInput.value.trim();
         const gender = document.querySelector('input[name="gender"]:checked');
         const role = document.querySelector('input[name="role"]:checked');
 
-        if (!name) {
-            showModal("Sila masukkan nama anda.");
-            return;
-        }
-        if (!gender) {
-            showModal("Sila pilih jantina anda.");
-            return;
-        }
-        if (!role) {
-            showModal("Sila pilih peranan anda.");
-            return;
-        }
+        if (!name) { showModal("Sila masukkan nama anda."); return; }
+        if (!gender) { showModal("Sila pilih jantina anda."); return; }
+        if (!role) { showModal("Sila pilih peranan anda."); return; }
 
         gameData.name = name;
         gameData.gender = gender.value;
@@ -532,22 +519,15 @@
         gameData.roundsPlayed = 0; 
         gameData.totalRating = 0;   
 
-        if (gameData.role === 'Panelis') {
-            patrikReminderText.style.display = 'block';
-        } else {
-            patrikReminderText.style.display = 'none';
-        }
+        patrikReminderText.style.display = (gameData.role === 'Panelis') ? 'block' : 'none';
         showScreen('reminder'); 
     });
 
-    // Screen 1.5: Reminder Screen
     proceedToIssuesButton.addEventListener('click', () => {
         populateIssueCards();
         showScreen('issueSelection');
     });
 
-
-    // Screen 2: Issue Selection
     function populateIssueCards() {
         issueCardContainer.innerHTML = ''; 
         const shuffled = [...allIssues].sort(() => 0.5 - Math.random());
@@ -564,35 +544,20 @@
     }
     refreshIssuesButton.addEventListener('click', populateIssueCards);
 
-
     function selectIssue(issueText) {
         gameData.currentIssueText = issueText;
-        // The #issueTextInEnvelope is now a direct child of .envelope-content for styling purposes.
-        // We set its text content directly.
         issueTextInEnvelope.textContent = gameData.currentIssueText; 
-        
-        // Check if text overflows and adjust alignment
-        // This needs to happen after text is set and element is visible (or calculated based on potential visibility)
-        // For simplicity, we'll rely on the CSS for now. If text is short, text-align:center on .envelope-content will center it.
-        // If it's long enough to make .envelope-content scroll, text-align:left will take precedence.
-
         envelopeDiv.classList.remove('open'); 
         showScreen('envelope');
-        
-        setTimeout(() => {
-            envelopeDiv.classList.add('open');
-        }, 100); 
-
+        setTimeout(() => envelopeDiv.classList.add('open'), 100); 
         setTimeout(startPrepCountdown, 1000); 
     }
 
-    // Screen 3: Envelope Reveal & Prep Countdown
     function startPrepCountdown() {
         let timeLeft = 90; 
         prepCountdownDisplay.textContent = timeLeft;
         prepMessage.textContent = "Fahami isu dan rancang hujah anda.";
         clearInterval(prepTimerInterval); 
-
         prepTimerInterval = setInterval(() => {
             timeLeft--;
             prepCountdownDisplay.textContent = timeLeft;
@@ -600,28 +565,20 @@
                 clearInterval(prepTimerInterval);
                 playBellSound();
                 prepMessage.textContent = "Masa persediaan tamat!";
-                setTimeout(() => { 
-                    startSpeakingTurn();
-                }, 1500);
+                setTimeout(startSpeakingTurn, 1500);
             }
         }, 1000);
     }
 
-    // Screen 4: Speaking Turn
     function startSpeakingTurn() {
         const speakTime = gameData.role === 'Moderator' ? 60 : 120; 
         let timeLeft = speakTime;
         
         mcGreeting.textContent = `Selamat maju jaya, ${gameData.name}! Giliran anda sebagai ${gameData.role}.`;
         speakCountdownDisplay.textContent = timeLeft; 
-        if (gameData.role === 'Moderator') {
-            speakMessage.textContent = "Sila mulakan forum dengan memperkenalkan isu ini.";
-        } else { 
-            speakMessage.textContent = "Sampaikan hujah anda menggunakan kerangka PATRIK.";
-        }
+        speakMessage.textContent = (gameData.role === 'Moderator') ? "Sila mulakan forum dengan memperkenalkan isu ini." : "Sampaikan hujah anda menggunakan kerangka PATRIK.";
         showScreen('speakingTurn');
         clearInterval(speakTimerInterval);
-
         speakTimerInterval = setInterval(() => {
             timeLeft--;
             speakCountdownDisplay.textContent = timeLeft;
@@ -629,14 +586,11 @@
                 clearInterval(speakTimerInterval);
                 playBellSound();
                 speakMessage.textContent = "Masa anda telah tamat!";
-                setTimeout(() => { 
-                    setupRatingScreen();
-                }, 1500);
+                setTimeout(setupRatingScreen, 1500);
             }
         }, 1000);
     }
 
-    // Screen 5: Self Rating
     function setupRatingScreen() {
         gameData.currentRating = 0; 
         document.querySelectorAll('#ratingButtonsContainer .rating-button').forEach(btn => btn.classList.remove('selected'));
@@ -654,9 +608,8 @@
         showScreen('options');
     });
 
-    // Screen 6: Post-Rating Options
     contohIsiButton.addEventListener('click', () => {
-        loadContohIsi();
+        loadContohIsi(); // This function is now synchronous
         showScreen('contohIsi');
     });
 
@@ -670,111 +623,46 @@
         showScreen('overview');
     });
 
-    // Screen 7: Contoh Isi
-    async function loadContohIsi() {
+    // UPDATED: loadContohIsi to use static data
+    function loadContohIsi() {
         contohIsiText.innerHTML = '';
         perkataanSukarList.innerHTML = '';
         perkataanSukarSection.style.display = 'none';
-        contohIsiLoading.style.display = 'flex';
+        contohIsiLoading.style.display = 'none'; // Hide loading spinner as it's instant
 
-        let promptText;
-        if (gameData.role === 'Moderator') {
-            promptText = `Sebagai seorang Pengerusi Forum yang berkaliber, sediakan satu skrip pembukaan untuk isu ini: "${gameData.currentIssueText}". Skrip anda perlu merangkumi:
-1.  Salam pembuka dan alu-aluan kepada hadirin (gunakan nada formal dan ceria seperti dalam contoh skrip forum).
-2.  Pengenalan ringkas kepada isu: Terangkan latar belakang dan kepentingan isu ini.
-3.  Cetusan persoalan utama: Kemukakan satu atau dua soalan pokok yang akan menjadi fokus perbincangan forum mengenai isu tersebut.
-Pastikan gaya bahasa adalah formal, menarik, dan sesuai untuk sebuah forum remaja. Sediakan juga senarai 3-5 perkataan sukar berkaitan isu tersebut beserta maksudnya yang mudah difahami oleh pelajar sekolah menengah. Pastikan jawapan dalam format JSON yang ditetapkan.`;
-        } else { // Panelis
-            promptText = `Sebagai seorang Panelis Forum yang petah dan analitikal, hasilkan satu contoh hujah yang mantap (boleh menyokong atau menentang) untuk isu ini: "${gameData.currentIssueText}". Hujah anda WAJIB menggunakan kerangka PATRIK (Pendapat, Alasan, Tanggapan, Rujukan, Implikasi, Kesimpulan). 
-Mulakan setiap bahagian PATRIK dengan labelnya dengan jelas (cth: PENDAHULUAN PANELIS: (Salam dan pengenalan ringkas)... PENDAPAT: ... ALASAN: ... dan seterusnya).
-Gunakan gaya bahasa formal, persuasif, dan berstruktur, seolah-olah anda sedang berucap dalam sebuah forum sebenar. Sediakan juga senarai 3-5 perkataan sukar berkaitan isu tersebut beserta maksudnya yang mudah difahami oleh pelajar sekolah menengah. Pastikan jawapan dalam format JSON yang ditetapkan.`;
-        }
+        const issueKey = gameData.currentIssueText;
+        const roleKey = gameData.role.toLowerCase(); // 'moderator' or 'panelis'
 
-        const payload = {
-            contents: [{ role: "user", parts: [{ text: promptText }] }],
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: {
-                    type: "OBJECT",
-                    properties: {
-                        "hujah": { "type": "STRING", "description": (gameData.role === 'Moderator' ? "Skrip pembukaan Pengerusi Forum: Salam, pengenalan isu, dan soalan fokus." : "Hujah Panelis Forum menggunakan kerangka PATRIK, dengan pendahuluan panelis dan label jelas untuk setiap bahagian PATRIK.") },
-                        "perkataan_sukar": {
-                            "type": "ARRAY",
-                            "description": "Senarai perkataan sukar dan maksudnya.",
-                            "items": {
-                                "type": "OBJECT",
-                                "properties": {
-                                    "perkataan": { "type": "STRING" },
-                                    "maksud": { "type": "STRING" }
-                                },
-                                "required": ["perkataan", "maksud"]
-                            }
-                        }
-                    },
-                    "required": ["hujah", "perkataan_sukar"]
-                }
-            }
-        };
-        
-        const apiKey = ""; 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("API Error:", errorData);
-                throw new Error(`API request failed with status ${response.status}: ${errorData.error?.message || 'Unknown error'}`);
-            }
-
-            const result = await response.json();
+        if (staticContohIsiData && staticContohIsiData[issueKey] && staticContohIsiData[issueKey][roleKey]) {
+            const data = staticContohIsiData[issueKey][roleKey];
+            let hujahContent = data.hujah || "Tiada contoh hujah tersedia untuk isu ini.";
+            hujahContent = hujahContent.replace(/\n/g, '<br>');
             
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                
-                const jsonText = result.candidates[0].content.parts[0].text;
-                const parsedJson = JSON.parse(jsonText);
+            const labelsToBold = [
+                "SALAM PEMBUKA:", "PENGENALAN ISU:", "LATAR BELAKANG ISU:", "KEPENTINGAN ISU:", "PERSOALAN UTAMA:", "SOALAN FOKUS:", 
+                "PENDAHULUAN PANELIS:", "PENDAPAT:", "ALASAN:", "TANGGAPAN:", "RUJUKAN:", "IMPLIKASI:", "KESIMPULAN:" 
+            ];
 
-                let hujahContent = parsedJson.hujah || "Tiada hujah diterima.";
-                hujahContent = hujahContent.replace(/\n/g, '<br>');
-                
-                const labelsToBold = [
-                    "SALAM PEMBUKA:", "PENGENALAN ISU:", "LATAR BELAKANG ISU:", "KEPENTINGAN ISU:", "PERSOALAN UTAMA:", "SOALAN FOKUS:", 
-                    "PENDAHULUAN PANELIS:", "PENDAPAT:", "ALASAN:", "TANGGAPAN:", "RUJUKAN:", "IMPLIKASI:", "KESIMPULAN:" 
-                ];
+            labelsToBold.forEach(label => {
+                const regex = new RegExp(`(^|&lt;br&gt;\\s*)(${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                hujahContent = hujahContent.replace(regex, (match, p1, p2) => `${p1}<strong class="text-emerald-700">${p2}</strong>`);
+            });
+            
+            contohIsiText.innerHTML = hujahContent;
 
-                labelsToBold.forEach(label => {
-                    const regex = new RegExp(`(^|&lt;br&gt;\\s*)(${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                    hujahContent = hujahContent.replace(regex, (match, p1, p2) => `${p1}<strong class="text-emerald-700">${p2}</strong>`);
+            if (data.perkataan_sukar && data.perkataan_sukar.length > 0) {
+                perkataanSukarSection.style.display = 'block';
+                data.perkataan_sukar.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<strong class="text-emerald-600">${item.perkataan}:</strong> ${item.maksud}`;
+                    perkataanSukarList.appendChild(listItem);
                 });
-                
-                contohIsiText.innerHTML = hujahContent;
-
-                if (parsedJson.perkataan_sukar && parsedJson.perkataan_sukar.length > 0) {
-                    perkataanSukarSection.style.display = 'block';
-                    parsedJson.perkataan_sukar.forEach(item => {
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `<strong class="text-emerald-600">${item.perkataan}:</strong> ${item.maksud}`;
-                        perkataanSukarList.appendChild(listItem);
-                    });
-                } else {
-                    perkataanSukarSection.style.display = 'none';
-                }
             } else {
-                throw new Error("Struktur jawapan API tidak dijangka atau kandungan kosong.");
+                perkataanSukarSection.style.display = 'none';
             }
-        } catch (error) {
-            console.error('Error fetching Contoh Isi:', error);
-            contohIsiText.innerHTML = `<p class="text-red-500">Maaf, berlaku ralat semasa memuatkan contoh isi. Sila cuba lagi. (${error.message})</p>`;
+        } else {
+            contohIsiText.innerHTML = `<p class="text-orange-500">Maaf, contoh isi untuk isu ini atau peranan ini belum tersedia dalam data tempatan.</p>`;
             perkataanSukarSection.style.display = 'none';
-        } finally {
-            contohIsiLoading.style.display = 'none';
         }
     }
 
@@ -782,7 +670,6 @@ Gunakan gaya bahasa formal, persuasif, dan berstruktur, seolah-olah anda sedang 
         showScreen('options');
     });
 
-    // Screen 8: Game Overview
     function displayOverview() {
         overviewName.textContent = gameData.name;
         overviewRole.textContent = gameData.role;
@@ -795,10 +682,8 @@ Gunakan gaya bahasa formal, persuasif, dan berstruktur, seolah-olah anda sedang 
 
     mainLagiButton.addEventListener('click', () => {
         userNameInput.value = '';
-        const genderRadios = document.querySelectorAll('input[name="gender"]');
-        genderRadios.forEach(radio => radio.checked = false);
-        const roleRadios = document.querySelectorAll('input[name="role"]');
-        roleRadios.forEach(radio => radio.checked = false);
+        document.querySelectorAll('input[name="gender"]').forEach(radio => radio.checked = false);
+        document.querySelectorAll('input[name="role"]').forEach(radio => radio.checked = false);
         
         gameData = { 
             name: '', gender: '', role: '', 
@@ -822,17 +707,17 @@ Gunakan gaya bahasa formal, persuasif, dan berstruktur, seolah-olah anda sedang 
         ratingButtonsContainer.appendChild(button);
     }
     
-    // Ensure the inner div for issue text exists within .envelope-content
     if (!document.getElementById('issueTextInEnvelope')) {
         const envelopeContent = document.querySelector('#envelopeScreen .envelope-content');
         if (envelopeContent) {
             const textDiv = document.createElement('div');
             textDiv.id = 'issueTextInEnvelope';
-            textDiv.className = 'text-gray-700'; // Apply original styling
+            textDiv.className = 'text-gray-700'; 
             envelopeContent.appendChild(textDiv);
         }
     }
     
+    contohIsiLoading.style.display = 'none'; // Ensure spinner is hidden on load
     showScreen('userInfo'); 
 
 </script>
