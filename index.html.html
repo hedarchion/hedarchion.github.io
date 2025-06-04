@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Forum Interaktif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior: none; /* Prevents pull-to-refresh on mobile */
+        }
+        .screen {
+            display: none; /* Hidden by default, shown by JS */
+            min-height: 100vh;
+            width: 100%;
+        }
+        .active-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Card floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+            50% { transform: translateY(-10px) scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+            100% { transform: translateY(0px) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        }
+        .floating-card {
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .floating-card:hover {
+            animation-play-state: paused; /* Pause float on hover */
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+        }
+
+        /* Envelope animation - UPDATED STYLES */
+        .envelope {
+            position: relative;
+            width: 90%; /* Make it responsive */
+            max-width: 400px; /* Max width for larger screens */
+            height: 280px; /* Increased height */
+            background-color: #FBBF24; /* Amber-400 */
+            border-radius: 10px;
+            cursor: default;
+            overflow: hidden; 
+        }
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140px; /* Adjusted flap height for new envelope size */
+            background-color: #F59E0B; /* Amber-500 */
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top center;
+            transition: transform 0.8s ease-in-out;
+            z-index: 10;
+        }
+        .envelope.open .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+        .envelope-content {
+            position: absolute;
+            top: 10px; /* Start closer to the top, will be covered by flap initially */
+            left: 10px;
+            right: 10px;
+            bottom: 10px; /* Use bottom to make it fill available space */
+            background-color: white;
+            padding: 20px; /* Increased padding */
+            border-radius: 5px;
+            text-align: left; /* Changed to left align */
+            opacity: 0;
+            transform: translateY(60px); /* Adjust initial transform for smoother reveal */
+            transition: opacity 0.5s 0.5s ease-in-out, transform 0.5s 0.5s ease-in-out; 
+            overflow-y: auto; /* Keep scroll for very long text, but area is larger */
+            font-size: 1.1rem; /* Increased font size */
+            line-height: 1.6; /* Improved line spacing */
+            display: flex; /* For centering text vertically if not scrolling */
+            align-items: center; /* For centering text vertically */
+            justify-content: center; /* For centering text horizontally if it's short */
+        }
+         .envelope-content > div { /* Wrapper for text to allow proper alignment */
+            width: 100%;
+        }
+        .envelope.open .envelope-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .countdown-timer {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #DC2626; /* Red-600 */
+        }
+        .rating-button {
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .rating-button:hover {
+            transform: scale(1.1);
+        }
+        .rating-button.selected {
+            background-color: #10B981; /* Green-500 */
+            color: white;
+        }
+        /* Custom modal for messages */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .modal-close-button {
+            background-color: #3B82F6; /* Blue-500 */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        /* Spinner for loading */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #3B82F6; /* Blue-500 */
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .prose strong { 
+            font-weight: bold !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen p-4">
+
+    <div id="appContainer" class="w-full max-w-lg mx-auto">
+
+        <!-- Screen 1: User Info -->
+        <div id="userInfoScreen" class="screen active-screen bg-gradient-to-br from-blue-400 to-indigo-600 p-6 rounded-lg shadow-xl">
+            <div class="bg-white p-8 rounded-lg shadow-md w-full">
+                <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Selamat Datang!</h1>
+                <p class="text-center text-gray-600 mb-8">Sila masukkan butiran anda untuk memulakan latihan.</p>
+                <div class="space-y-6">
+                    <div>
+                        <label for="userName" class="block text-sm font-medium text-gray-700 mb-1">Nama:</label>
+                        <input type="text" id="userName" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Cth: Ali bin Abu">
+                    </div>
+                    <div>
+                        <span class="block text-sm font-medium text-gray-700 mb-1">Jantina:</span>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 p-2 border border-gray-300 rounded-md hover:bg-indigo-50 cursor-pointer flex-1 justify-center">
+                                <input type="radio" name="gender" value="Lelaki" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                <span>Lelaki</span>
+                            </label>
+                            <label class="flex items-center space-x-2 p-2 border border-gray-300 rounded-md hover:bg-indigo-50 cursor-pointer flex-1 justify-center">
+                                <input type="radio" name="gender" value="Perempuan" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                <span>Perempuan</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-medium text-gray-700 mb-1">Peranan:</span>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 p-2 border border-gray-300 rounded-md hover:bg-indigo-50 cursor-pointer flex-1 justify-center">
+                                <input type="radio" name="role" value="Moderator" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                <span>Moderator</span>
+                            </label>
+                            <label class="flex items-center space-x-2 p-2 border border-gray-300 rounded-md hover:bg-indigo-50 cursor-pointer flex-1 justify-center">
+                                <input type="radio" name="role" value="Panelis" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                <span>Panelis</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button id="startGameButton" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out transform hover:scale-105">Mula Latihan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 1.5: Reminder Screen -->
+        <div id="reminderScreen" class="screen bg-gradient-to-br from-yellow-300 to-orange-500 p-6 rounded-lg shadow-xl">
+            <div class="bg-white p-8 rounded-lg shadow-md w-full text-center">
+                <h2 class="text-3xl font-bold text-orange-700 mb-6">Peringatan Penting!</h2>
+                <img src="https://placehold.co/150x150/FFD700/4A4A4A?text=Nota+%26+Pen" alt="Nota dan Pen" class="mx-auto mb-6 rounded-lg" onerror="this.src='https://placehold.co/150x150/CCCCCC/FFFFFF?text=Gambar+Rosak'">
+                <p class="text-gray-700 text-lg mb-4">Sebelum kita mula, sila sediakan pen dan kertas untuk mencatat nota penting.</p>
+                <p id="patrikReminder" class="text-gray-600 mb-8">Jika anda seorang <strong>Panelis</strong>, ingat untuk menggunakan kerangka <strong>PATRIK</strong> dalam hujah anda!</p>
+                <ul class="text-left text-gray-600 list-disc list-inside mb-8 mx-auto max-w-xs">
+                    <li><strong>P</strong> - Pendapat</li>
+                    <li><strong>A</strong> - Alasan</li>
+                    <li><strong>T</strong> - Tanggapan</li>
+                    <li><strong>R</strong> - Rujukan</li>
+                    <li><strong>I</strong> - Implikasi</li>
+                    <li><strong>K</strong> - Kesimpulan</li>
+                </ul>
+                <button id="proceedToIssuesButton" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out transform hover:scale-105">Saya Dah Sedia!</button>
+            </div>
+        </div>
+
+
+        <!-- Screen 2: Issue Selection -->
+        <div id="issueSelectionScreen" class="screen bg-gradient-to-br from-green-400 to-teal-600 p-6">
+            <h2 class="text-3xl font-bold text-white text-center mb-2">Pilih Isu</h2>
+            <p class="text-white text-center mb-8">Klik pada salah satu kad isu di bawah.</p>
+            <div id="issueCardContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                <!-- Issue cards will be populated here by JavaScript -->
+            </div>
+             <button id="refreshIssuesButton" class="mt-8 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Segarkan Isu</button>
+        </div>
+
+        <!-- Screen 3: Envelope Reveal & Prep Countdown -->
+        <div id="envelopeScreen" class="screen bg-gradient-to-br from-amber-400 to-orange-600 p-6">
+            <h2 class="text-3xl font-bold text-white text-center mb-6">Isu Anda!</h2>
+            <div id="envelope" class="envelope mx-auto mb-6">
+                <div class="envelope-flap"></div>
+                <div class="envelope-content"> <!-- Text wrapper div added in JS -->
+                    <div id="issueTextInEnvelope" class="text-gray-700"></div>
+                </div>
+            </div>
+            <p class="text-white text-center text-lg mb-2">Masa Persediaan:</p>
+            <div id="prepCountdown" class="countdown-timer text-white mb-8">90</div>
+            <p id="prepMessage" class="text-white text-center text-sm"></p>
+        </div>
+
+        <!-- Screen 4: Speaking Turn -->
+        <div id="speakingTurnScreen" class="screen bg-gradient-to-br from-purple-400 to-pink-600 p-6">
+            <div id="mcGreeting" class="text-2xl font-semibold text-white text-center mb-6"></div>
+            <p class="text-white text-center text-lg mb-2">Masa Anda Bercakap:</p>
+            <div id="speakCountdown" class="countdown-timer text-white mb-8">00</div>
+            <p id="speakMessage" class="text-white text-center text-sm"></p>
+        </div>
+
+        <!-- Screen 5: Self Rating -->
+        <div id="ratingScreen" class="screen bg-gradient-to-br from-red-400 to-rose-600 p-6">
+            <div class="bg-white p-8 rounded-lg shadow-md w-full">
+                <h2 class="text-2xl font-bold text-center text-rose-700 mb-6">Nilaikan Prestasi Anda</h2>
+                <p class="text-center text-gray-600 mb-6">Pada skala 1 (Perlu Banyak Peningkatan) hingga 9 (Sangat Cemerlang), sejauh mana anda menilai prestasi anda?</p>
+                <div id="ratingButtonsContainer" class="flex flex-wrap justify-center gap-2 mb-8">
+                    <!-- Rating buttons 1-9 will be populated here -->
+                </div>
+                <button id="submitRatingButton" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Hantar Penilaian</button>
+            </div>
+        </div>
+
+        <!-- Screen 6: Post-Rating Options -->
+        <div id="optionsScreen" class="screen bg-gradient-to-br from-sky-400 to-cyan-600 p-6">
+            <div class="bg-white p-8 rounded-lg shadow-md w-full text-center">
+                <h2 class="text-2xl font-bold text-cyan-700 mb-4">Penilaian Diterima!</h2>
+                <p class="text-gray-700 mb-2">Markah anda: <span id="userRatingDisplay" class="font-bold text-xl text-cyan-700">0</span></p>
+                <p class="text-gray-600 mb-8">Apa yang anda ingin lakukan seterusnya?</p>
+                <div class="space-y-4">
+                    <button id="contohIsiButton" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Lihat Contoh Isi</button>
+                    <button id="soalanLainButton" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Pilih Soalan Lain</button>
+                    <button id="tamatSimulasiButton" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Tamat Simulasi</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 7: Contoh Isi -->
+        <div id="contohIsiScreen" class="screen bg-gradient-to-br from-lime-400 to-emerald-600 p-6">
+            <div class="bg-white p-8 rounded-lg shadow-md w-full max-h-[90vh] overflow-y-auto">
+                <h2 class="text-2xl font-bold text-emerald-700 mb-6 text-center">Contoh Isi & Perkataan Sukar</h2>
+                <div id="contohIsiContent" class="text-gray-700 space-y-4">
+                    <div id="contohIsiLoading" class="flex justify-center items-center h-32">
+                        <div class="spinner"></div>
+                        <p class="ml-4 text-emerald-600">Sedang memuatkan contoh...</p>
+                    </div>
+                    <div id="contohIsiText" class="prose max-w-none"></div>
+                    <div id="perkataanSukarSection">
+                        <h3 class="text-xl font-semibold text-emerald-600 mt-6 mb-3">Perkataan Sukar:</h3>
+                        <ul id="perkataanSukarList" class="list-disc list-inside space-y-1"></ul>
+                    </div>
+                </div>
+                <button id="kembaliDariContohButton" class="mt-8 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Kembali</button>
+            </div>
+        </div>
+
+        <!-- Screen 8: Game Overview -->
+        <div id="overviewScreen" class="screen bg-gradient-to-br from-violet-400 to-fuchsia-600 p-6">
+             <div class="bg-white p-8 rounded-lg shadow-md w-full text-center">
+                <h2 class="text-2xl font-bold text-fuchsia-700 mb-6">Rumusan Simulasi</h2>
+                <div id="overviewDetails" class="text-gray-700 space-y-2 mb-6 text-left">
+                    <p><strong>Nama:</strong> <span id="overviewName"></span></p>
+                    <p><strong>Peranan:</strong> <span id="overviewRole"></span></p>
+                    <p><strong>Isu Dipilih:</strong> <span id="overviewIssue"></span></p>
+                    <p><strong>Markah Kendiri:</strong> <span id="overviewRating" class="font-bold text-xl"></span></p>
+                    <p><strong>Jumlah Pusingan:</strong> <span id="overviewRounds"></span></p>
+                    <p><strong>Purata Markah:</strong> <span id="overviewAverageRating" class="font-bold text-xl"></span></p>
+                </div>
+                <p class="text-sm text-gray-600 mb-8">Sila ambil tangkapan skrin (screenshot) halaman ini dan hantar kepada <strong>Cikgu Ashraf</strong>.</p>
+                <button id="mainLagiButton" class="w-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-semibold py-3 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Main Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal Structure -->
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage" class="text-lg text-gray-700 mb-4"></p>
+            <button id="modalCloseButton" class="modal-close-button">OK</button>
+        </div>
+    </div>
+
+
+<script>
+    // --- DOM Elements ---
+    const screens = {
+        userInfo: document.getElementById('userInfoScreen'),
+        reminder: document.getElementById('reminderScreen'), 
+        issueSelection: document.getElementById('issueSelectionScreen'),
+        envelope: document.getElementById('envelopeScreen'),
+        speakingTurn: document.getElementById('speakingTurnScreen'),
+        rating: document.getElementById('ratingScreen'),
+        options: document.getElementById('optionsScreen'),
+        contohIsi: document.getElementById('contohIsiScreen'),
+        overview: document.getElementById('overviewScreen'),
+    };
+
+    const userNameInput = document.getElementById('userName');
+    const startGameButton = document.getElementById('startGameButton');
+    
+    const patrikReminderText = document.getElementById('patrikReminder'); 
+    const proceedToIssuesButton = document.getElementById('proceedToIssuesButton'); 
+
+    const issueCardContainer = document.getElementById('issueCardContainer');
+    const refreshIssuesButton = document.getElementById('refreshIssuesButton');
+    
+    const envelopeDiv = document.getElementById('envelope');
+    const envelopeContentDiv = document.querySelector('#envelopeScreen .envelope-content'); // Query specific content div
+    const issueTextInEnvelope = document.getElementById('issueTextInEnvelope'); // This is the inner div for text
+
+    const prepCountdownDisplay = document.getElementById('prepCountdown');
+    const prepMessage = document.getElementById('prepMessage');
+
+    const mcGreeting = document.getElementById('mcGreeting');
+    const speakCountdownDisplay = document.getElementById('speakCountdown');
+    const speakMessage = document.getElementById('speakMessage');
+
+    const ratingButtonsContainer = document.getElementById('ratingButtonsContainer');
+    const submitRatingButton = document.getElementById('submitRatingButton');
+
+    const userRatingDisplay = document.getElementById('userRatingDisplay');
+    const contohIsiButton = document.getElementById('contohIsiButton');
+    const soalanLainButton = document.getElementById('soalanLainButton');
+    const tamatSimulasiButton = document.getElementById('tamatSimulasiButton');
+
+    const contohIsiContent = document.getElementById('contohIsiContent');
+    const contohIsiLoading = document.getElementById('contohIsiLoading');
+    const contohIsiText = document.getElementById('contohIsiText');
+    const perkataanSukarSection = document.getElementById('perkataanSukarSection');
+    const perkataanSukarList = document.getElementById('perkataanSukarList');
+    const kembaliDariContohButton = document.getElementById('kembaliDariContohButton');
+    
+    const overviewDetails = document.getElementById('overviewDetails');
+    const overviewName = document.getElementById('overviewName');
+    const overviewRole = document.getElementById('overviewRole');
+    const overviewIssue = document.getElementById('overviewIssue');
+    const overviewRating = document.getElementById('overviewRating');
+    const overviewRounds = document.getElementById('overviewRounds');
+    const overviewAverageRating = document.getElementById('overviewAverageRating');
+    const mainLagiButton = document.getElementById('mainLagiButton');
+
+    const customModal = document.getElementById('customModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalCloseButton = document.getElementById('modalCloseButton');
+
+    // --- Game Data & State ---
+    let gameData = {
+        name: '',
+        gender: '',
+        role: '', // Moderator or Panelis
+        currentIssueText: '',
+        currentRating: 0,
+        roundsPlayed: 0,
+        totalRating: 0,
+    };
+
+    let prepTimerInterval, speakTimerInterval;
+    let bellSound;
+
+    const allIssues = [
+        "Tekanan Akademik: Tekanan tinggi untuk cemerlang dalam peperiksaan (contohnya SPM).",
+        "Beban Kerja Sekolah yang Berat: Terlalu banyak kerja rumah dan tugasan sekolah.",
+        "Sistem Pendidikan Berorientasikan Peperiksaan: Fokus yang berlebihan kepada peperiksaan berbanding pembangunan holistik.",
+        "Kurang Minat dalam Pelajaran: Kesukaran untuk menumpukan perhatian atau merasa bosan dengan subjek sekolah.",
+        "Kesukaran Memahami Subjek Tertentu: Cabaran dalam menguasai mata pelajaran seperti Matematik, Sains, atau Bahasa Inggeris.",
+        "Kekurangan Bimbingan Kerjaya: Ketidakpastian mengenai laluan kerjaya masa depan dan pilihan kursus pengajian tinggi.",
+        "Hubungan Guru-Pelajar: Isu komunikasi atau persefahaman dengan guru.",
+        "Kualiti Pengajaran: Persepsi terhadap kualiti pengajaran dan kaedah yang digunakan oleh guru.",
+        "Kekurangan Sumber Pembelajaran: Akses terhad kepada buku rujukan, teknologi, atau persekitaran pembelajaran yang kondusif.",
+        "Ponteng Sekolah: Masalah ketidakhadiran ke sekolah tanpa sebab munasabah.",
+        "Penyesuaian kepada Pembelajaran Dalam Talian/Hibrid: Cabaran dengan pembelajaran jarak jauh atau gabungan.",
+        "Penglibatan Terhad dalam Aktiviti Kokurikulum: Kurang penyertaan atau peluang dalam aktiviti luar darjah.",
+        "Isu Disiplin di Sekolah: Pelanggaran peraturan sekolah dan masalah tingkah laku.",
+        "Persaingan yang Sengit: Persaingan yang tinggi di kalangan pelajar untuk mendapatkan tempat di universiti atau biasiswa.",
+        "Kurikulum yang Padat: Silibus yang dianggap terlalu banyak untuk dikuasai dalam tempoh masa yang ditetapkan.",
+        "Stres/Tekanan: Stres berkaitan akademik, sosial, atau keluarga.",
+        "Kebimbangan/Anxieti: Perasaan risau yang berlebihan mengenai pelbagai perkara.",
+        "Kemurungan/Depresi: Perasaan sedih yang berpanjangan dan kehilangan minat.",
+        "Pemikiran untuk Mencederakan Diri/Bunuh Diri: Isu kesihatan mental yang serius.",
+        "Harga Diri Rendah: Kurang keyakinan diri dan pandangan negatif terhadap diri sendiri.",
+        "Kelesuan Emosi: Keletihan emosi akibat tekanan yang berpanjangan.",
+        "Kesunyian: Perasaan terasing atau kekurangan hubungan sosial yang bermakna.",
+        "Kesukaran Mengurus Emosi: Cabaran dalam mengawal kemarahan, kesedihan, atau kekecewaan.",
+        "Stigma Kesihatan Mental: Keengganan untuk mendapatkan bantuan kerana malu atau takut dihakimi.",
+        "Tekanan Perasaan Akibat Perubahan Hormon: Ketidakstabilan emosi semasa akil baligh.",
+        "Tekanan Rakan Sebaya: Pengaruh negatif daripada rakan sebaya untuk melakukan perkara yang tidak diingini.",
+        "Buli: Menjadi mangsa buli secara fizikal, lisan, atau sosial.",
+        "Masalah Perhubungan Percintaan: Cabaran dalam hubungan cinta remaja.",
+        "Konflik dengan Rakan: Perselisihan faham atau pergaduhan dengan kawan-kawan.",
+        "Kesukaran Bersosial/Mencari Kawan: Rasa malu atau kekok dalam interaksi sosial.",
+        "Pengaruh Geng/Kumpulan Liar: Terlibat dalam kumpulan yang mempunyai pengaruh buruk.",
+        "Diskriminasi: Dilayan secara tidak adil berdasarkan kaum, agama, jantina, atau latar belakang.",
+        "Penglibatan dalam Aktiviti Tidak Bermoral: Terjebak dalam kegiatan seperti vandalisme atau lumba haram.",
+        "Isu Identiti Jantina dan Seksualiti: Kekeliruan atau cabaran berkaitan identiti diri.",
+        "Kurang Pendidikan Seksual yang Komprehensif: Kekurangan pengetahuan mengenai kesihatan reproduktif dan seksual.",
+        "Buli Siber: Menjadi mangsa buli melalui platform dalam talian.",
+        "Ketagihan Media Sosial: Penggunaan media sosial yang berlebihan sehingga mengganggu rutin harian.",
+        "Perbandingan Sosial Dalam Talian: Membandingkan diri dengan orang lain di media sosial yang membawa kepada perasaan rendah diri.",
+        "Pendedahan kepada Kandungan Tidak Sesuai: Terdedah kepada bahan lucah, ganas, atau berbahaya dalam talian.",
+        "Kurang Privasi Dalam Talian: Kebimbangan mengenai keselamatan data peribadi di internet.",
+        "Penyebaran Maklumat Palsu: Kesukaran membezakan berita benar dan palsu.",
+        "Tekanan untuk Mengekalkan Persona Dalam Talian: Usaha untuk kelihatan sempurna atau popular di media sosial.",
+        "Gangguan Tidur Akibat Penggunaan Gajet: Masalah tidur kerana menggunakan telefon bimbit atau komputer sebelum tidur.",
+        "Sexting dan Risiko Berkaitan: Penghantaran mesej atau gambar berunsur seksual.",
+        "Kurang Tidur: Tidak mendapat rehat yang mencukupi.",
+        "Pemakanan Tidak Sihat: Pengambilan makanan segera atau makanan ringan yang berlebihan.",
+        "Kurang Aktiviti Fizikal: Gaya hidup sedentari dan kurang bersenam.",
+        "Isu Imej Badan: Tidak berpuas hati dengan penampilan fizikal diri.",
+        "Merokok/Vaping: Terlibat dalam tabiat merokok atau menggunakan vape.",
+        "Penyalahgunaan Bahan: Penggunaan dadah atau alkohol.",
+        "Masalah Kesihatan Berkaitan Postur: Akibat penggunaan gajet atau beg sekolah yang berat.",
+        "Keselamatan Jalan Raya: Risiko kemalangan semasa berulang-alik ke sekolah.",
+        "Ancaman Jenayah: Risiko menjadi mangsa ragut, curi, atau jenayah lain.",
+        "Keselamatan di Sekolah: Kebimbangan mengenai persekitaran sekolah yang selamat daripada ancaman fizikal atau buli.",
+        "Gangguan Seksual: Mengalami gangguan seksual di sekolah atau luar sekolah.",
+        "Kekurangan Kemahiran Hidup: Kurang pendedahan kepada kemahiran praktikal seperti pengurusan masa atau penyelesaian masalah.",
+        "Ketidakpastian Mengenai Masa Depan: Kebimbangan mengenai pekerjaan, kestabilan kewangan, dan kehidupan dewasa.",
+        "Kurang Peluang Pembangunan Bakat: Tiada platform untuk mengembangkan minat dan bakat.",
+        "Masalah Keluarga: Konflik ibu bapa, perceraian, atau isu kewangan keluarga yang memberi kesan kepada pelajar.",
+        "Kurang Sokongan Keluarga: Rasa tidak difahami atau disokong oleh ahli keluarga.",
+        "Jangkaan Ibu Bapa yang Terlalu Tinggi: Tekanan daripada ibu bapa untuk mencapai keputusan cemerlang.",
+        "Kurang Komunikasi dengan Ibu Bapa: Kesukaran untuk berbincang masalah dengan ibu bapa.",
+        "Kekurangan Wang Saku/Perbelanjaan: Kesukaran menampung perbelanjaan harian atau keperluan sekolah.",
+        "Kurang Celik Kewangan: Kurang pengetahuan mengenai pengurusan wang dan simpanan.",
+        "Tekanan untuk Memiliki Barangan Berjenama: Rasa tertekan untuk memiliki barangan mewah seperti rakan-rakan."
+    ];
+    let displayedIssues = [];
+
+
+    // --- Utility Functions ---
+    function showScreen(screenName) {
+        Object.values(screens).forEach(screen => screen.classList.remove('active-screen'));
+        screens[screenName].classList.add('active-screen');
+        window.scrollTo(0, 0); 
+    }
+
+    function playBellSound() {
+        if (!bellSound) {
+             bellSound = new Tone.Synth({
+                oscillator: { type: "sine" },
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
+            }).toDestination();
+        }
+        bellSound.triggerAttackRelease("C5", "8n", Tone.now());
+        bellSound.triggerAttackRelease("G5", "8n", Tone.now() + 0.2);
+    }
+    
+    function showModal(message) {
+        modalMessage.textContent = message;
+        customModal.style.display = "flex";
+    }
+
+    modalCloseButton.onclick = function() {
+        customModal.style.display = "none";
+    }
+    window.onclick = function(event) { 
+        if (event.target == customModal) {
+            customModal.style.display = "none";
+        }
+    }
+
+    // --- Screen Logic ---
+
+    // Screen 1: User Info
+    startGameButton.addEventListener('click', () => {
+        const name = userNameInput.value.trim();
+        const gender = document.querySelector('input[name="gender"]:checked');
+        const role = document.querySelector('input[name="role"]:checked');
+
+        if (!name) {
+            showModal("Sila masukkan nama anda.");
+            return;
+        }
+        if (!gender) {
+            showModal("Sila pilih jantina anda.");
+            return;
+        }
+        if (!role) {
+            showModal("Sila pilih peranan anda.");
+            return;
+        }
+
+        gameData.name = name;
+        gameData.gender = gender.value;
+        gameData.role = role.value;
+        gameData.roundsPlayed = 0; 
+        gameData.totalRating = 0;   
+
+        if (gameData.role === 'Panelis') {
+            patrikReminderText.style.display = 'block';
+        } else {
+            patrikReminderText.style.display = 'none';
+        }
+        showScreen('reminder'); 
+    });
+
+    // Screen 1.5: Reminder Screen
+    proceedToIssuesButton.addEventListener('click', () => {
+        populateIssueCards();
+        showScreen('issueSelection');
+    });
+
+
+    // Screen 2: Issue Selection
+    function populateIssueCards() {
+        issueCardContainer.innerHTML = ''; 
+        const shuffled = [...allIssues].sort(() => 0.5 - Math.random());
+        displayedIssues = shuffled.slice(0, 9); 
+
+        displayedIssues.forEach(issueText => {
+            const card = document.createElement('div');
+            card.className = 'floating-card bg-white p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex items-center justify-center text-center h-32 sm:h-36'; 
+            const displayText = issueText.length > 70 ? issueText.substring(0, 70) + "..." : issueText; 
+            card.innerHTML = `<h3 class="font-semibold text-sm sm:text-base text-teal-700">${displayText}</h3>`; 
+            card.addEventListener('click', () => selectIssue(issueText));
+            issueCardContainer.appendChild(card);
+        });
+    }
+    refreshIssuesButton.addEventListener('click', populateIssueCards);
+
+
+    function selectIssue(issueText) {
+        gameData.currentIssueText = issueText;
+        // The #issueTextInEnvelope is now a direct child of .envelope-content for styling purposes.
+        // We set its text content directly.
+        issueTextInEnvelope.textContent = gameData.currentIssueText; 
+        
+        // Check if text overflows and adjust alignment
+        // This needs to happen after text is set and element is visible (or calculated based on potential visibility)
+        // For simplicity, we'll rely on the CSS for now. If text is short, text-align:center on .envelope-content will center it.
+        // If it's long enough to make .envelope-content scroll, text-align:left will take precedence.
+
+        envelopeDiv.classList.remove('open'); 
+        showScreen('envelope');
+        
+        setTimeout(() => {
+            envelopeDiv.classList.add('open');
+        }, 100); 
+
+        setTimeout(startPrepCountdown, 1000); 
+    }
+
+    // Screen 3: Envelope Reveal & Prep Countdown
+    function startPrepCountdown() {
+        let timeLeft = 90; 
+        prepCountdownDisplay.textContent = timeLeft;
+        prepMessage.textContent = "Fahami isu dan rancang hujah anda.";
+        clearInterval(prepTimerInterval); 
+
+        prepTimerInterval = setInterval(() => {
+            timeLeft--;
+            prepCountdownDisplay.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(prepTimerInterval);
+                playBellSound();
+                prepMessage.textContent = "Masa persediaan tamat!";
+                setTimeout(() => { 
+                    startSpeakingTurn();
+                }, 1500);
+            }
+        }, 1000);
+    }
+
+    // Screen 4: Speaking Turn
+    function startSpeakingTurn() {
+        const speakTime = gameData.role === 'Moderator' ? 60 : 120; 
+        let timeLeft = speakTime;
+        
+        mcGreeting.textContent = `Selamat maju jaya, ${gameData.name}! Giliran anda sebagai ${gameData.role}.`;
+        speakCountdownDisplay.textContent = timeLeft; 
+        if (gameData.role === 'Moderator') {
+            speakMessage.textContent = "Sila mulakan forum dengan memperkenalkan isu ini.";
+        } else { 
+            speakMessage.textContent = "Sampaikan hujah anda menggunakan kerangka PATRIK.";
+        }
+        showScreen('speakingTurn');
+        clearInterval(speakTimerInterval);
+
+        speakTimerInterval = setInterval(() => {
+            timeLeft--;
+            speakCountdownDisplay.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(speakTimerInterval);
+                playBellSound();
+                speakMessage.textContent = "Masa anda telah tamat!";
+                setTimeout(() => { 
+                    setupRatingScreen();
+                }, 1500);
+            }
+        }, 1000);
+    }
+
+    // Screen 5: Self Rating
+    function setupRatingScreen() {
+        gameData.currentRating = 0; 
+        document.querySelectorAll('#ratingButtonsContainer .rating-button').forEach(btn => btn.classList.remove('selected'));
+        showScreen('rating');
+    }
+
+    submitRatingButton.addEventListener('click', () => {
+        if (gameData.currentRating === 0) {
+            showModal("Sila pilih markah penilaian anda (1-9).");
+            return;
+        }
+        gameData.roundsPlayed++;
+        gameData.totalRating += gameData.currentRating;
+        userRatingDisplay.textContent = gameData.currentRating;
+        showScreen('options');
+    });
+
+    // Screen 6: Post-Rating Options
+    contohIsiButton.addEventListener('click', () => {
+        loadContohIsi();
+        showScreen('contohIsi');
+    });
+
+    soalanLainButton.addEventListener('click', () => {
+        populateIssueCards(); 
+        showScreen('issueSelection');
+    });
+
+    tamatSimulasiButton.addEventListener('click', () => {
+        displayOverview();
+        showScreen('overview');
+    });
+
+    // Screen 7: Contoh Isi
+    async function loadContohIsi() {
+        contohIsiText.innerHTML = '';
+        perkataanSukarList.innerHTML = '';
+        perkataanSukarSection.style.display = 'none';
+        contohIsiLoading.style.display = 'flex';
+
+        let promptText;
+        if (gameData.role === 'Moderator') {
+            promptText = `Sebagai seorang Pengerusi Forum yang berkaliber, sediakan satu skrip pembukaan untuk isu ini: "${gameData.currentIssueText}". Skrip anda perlu merangkumi:
+1.  Salam pembuka dan alu-aluan kepada hadirin (gunakan nada formal dan ceria seperti dalam contoh skrip forum).
+2.  Pengenalan ringkas kepada isu: Terangkan latar belakang dan kepentingan isu ini.
+3.  Cetusan persoalan utama: Kemukakan satu atau dua soalan pokok yang akan menjadi fokus perbincangan forum mengenai isu tersebut.
+Pastikan gaya bahasa adalah formal, menarik, dan sesuai untuk sebuah forum remaja. Sediakan juga senarai 3-5 perkataan sukar berkaitan isu tersebut beserta maksudnya yang mudah difahami oleh pelajar sekolah menengah. Pastikan jawapan dalam format JSON yang ditetapkan.`;
+        } else { // Panelis
+            promptText = `Sebagai seorang Panelis Forum yang petah dan analitikal, hasilkan satu contoh hujah yang mantap (boleh menyokong atau menentang) untuk isu ini: "${gameData.currentIssueText}". Hujah anda WAJIB menggunakan kerangka PATRIK (Pendapat, Alasan, Tanggapan, Rujukan, Implikasi, Kesimpulan). 
+Mulakan setiap bahagian PATRIK dengan labelnya dengan jelas (cth: PENDAHULUAN PANELIS: (Salam dan pengenalan ringkas)... PENDAPAT: ... ALASAN: ... dan seterusnya).
+Gunakan gaya bahasa formal, persuasif, dan berstruktur, seolah-olah anda sedang berucap dalam sebuah forum sebenar. Sediakan juga senarai 3-5 perkataan sukar berkaitan isu tersebut beserta maksudnya yang mudah difahami oleh pelajar sekolah menengah. Pastikan jawapan dalam format JSON yang ditetapkan.`;
+        }
+
+        const payload = {
+            contents: [{ role: "user", parts: [{ text: promptText }] }],
+            generationConfig: {
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "OBJECT",
+                    properties: {
+                        "hujah": { "type": "STRING", "description": (gameData.role === 'Moderator' ? "Skrip pembukaan Pengerusi Forum: Salam, pengenalan isu, dan soalan fokus." : "Hujah Panelis Forum menggunakan kerangka PATRIK, dengan pendahuluan panelis dan label jelas untuk setiap bahagian PATRIK.") },
+                        "perkataan_sukar": {
+                            "type": "ARRAY",
+                            "description": "Senarai perkataan sukar dan maksudnya.",
+                            "items": {
+                                "type": "OBJECT",
+                                "properties": {
+                                    "perkataan": { "type": "STRING" },
+                                    "maksud": { "type": "STRING" }
+                                },
+                                "required": ["perkataan", "maksud"]
+                            }
+                        }
+                    },
+                    "required": ["hujah", "perkataan_sukar"]
+                }
+            }
+        };
+        
+        const apiKey = ""; 
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("API Error:", errorData);
+                throw new Error(`API request failed with status ${response.status}: ${errorData.error?.message || 'Unknown error'}`);
+            }
+
+            const result = await response.json();
+            
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                
+                const jsonText = result.candidates[0].content.parts[0].text;
+                const parsedJson = JSON.parse(jsonText);
+
+                let hujahContent = parsedJson.hujah || "Tiada hujah diterima.";
+                hujahContent = hujahContent.replace(/\n/g, '<br>');
+                
+                const labelsToBold = [
+                    "SALAM PEMBUKA:", "PENGENALAN ISU:", "LATAR BELAKANG ISU:", "KEPENTINGAN ISU:", "PERSOALAN UTAMA:", "SOALAN FOKUS:", 
+                    "PENDAHULUAN PANELIS:", "PENDAPAT:", "ALASAN:", "TANGGAPAN:", "RUJUKAN:", "IMPLIKASI:", "KESIMPULAN:" 
+                ];
+
+                labelsToBold.forEach(label => {
+                    const regex = new RegExp(`(^|&lt;br&gt;\\s*)(${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                    hujahContent = hujahContent.replace(regex, (match, p1, p2) => `${p1}<strong class="text-emerald-700">${p2}</strong>`);
+                });
+                
+                contohIsiText.innerHTML = hujahContent;
+
+                if (parsedJson.perkataan_sukar && parsedJson.perkataan_sukar.length > 0) {
+                    perkataanSukarSection.style.display = 'block';
+                    parsedJson.perkataan_sukar.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<strong class="text-emerald-600">${item.perkataan}:</strong> ${item.maksud}`;
+                        perkataanSukarList.appendChild(listItem);
+                    });
+                } else {
+                    perkataanSukarSection.style.display = 'none';
+                }
+            } else {
+                throw new Error("Struktur jawapan API tidak dijangka atau kandungan kosong.");
+            }
+        } catch (error) {
+            console.error('Error fetching Contoh Isi:', error);
+            contohIsiText.innerHTML = `<p class="text-red-500">Maaf, berlaku ralat semasa memuatkan contoh isi. Sila cuba lagi. (${error.message})</p>`;
+            perkataanSukarSection.style.display = 'none';
+        } finally {
+            contohIsiLoading.style.display = 'none';
+        }
+    }
+
+    kembaliDariContohButton.addEventListener('click', () => {
+        showScreen('options');
+    });
+
+    // Screen 8: Game Overview
+    function displayOverview() {
+        overviewName.textContent = gameData.name;
+        overviewRole.textContent = gameData.role;
+        overviewIssue.textContent = gameData.currentIssueText; 
+        overviewRating.textContent = gameData.currentRating; 
+        overviewRounds.textContent = gameData.roundsPlayed;
+        const averageRating = gameData.roundsPlayed > 0 ? (gameData.totalRating / gameData.roundsPlayed).toFixed(1) : "N/A";
+        overviewAverageRating.textContent = averageRating;
+    }
+
+    mainLagiButton.addEventListener('click', () => {
+        userNameInput.value = '';
+        const genderRadios = document.querySelectorAll('input[name="gender"]');
+        genderRadios.forEach(radio => radio.checked = false);
+        const roleRadios = document.querySelectorAll('input[name="role"]');
+        roleRadios.forEach(radio => radio.checked = false);
+        
+        gameData = { 
+            name: '', gender: '', role: '', 
+            currentIssueText: '', currentRating: 0, 
+            roundsPlayed: 0, totalRating: 0 
+        };
+        showScreen('userInfo');
+    });
+
+    // --- Initial Setup ---
+    for (let i = 1; i <= 9; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.className = 'rating-button bg-white hover:bg-rose-100 text-rose-600 font-semibold py-3 px-5 rounded-md border border-rose-300 shadow-sm';
+        button.type = 'button'; 
+        button.addEventListener('click', () => {
+            gameData.currentRating = i;
+            document.querySelectorAll('#ratingButtonsContainer .rating-button').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+        });
+        ratingButtonsContainer.appendChild(button);
+    }
+    
+    // Ensure the inner div for issue text exists within .envelope-content
+    if (!document.getElementById('issueTextInEnvelope')) {
+        const envelopeContent = document.querySelector('#envelopeScreen .envelope-content');
+        if (envelopeContent) {
+            const textDiv = document.createElement('div');
+            textDiv.id = 'issueTextInEnvelope';
+            textDiv.className = 'text-gray-700'; // Apply original styling
+            envelopeContent.appendChild(textDiv);
+        }
+    }
+    
+    showScreen('userInfo'); 
+
+</script>
+</body>
+</html>
