@@ -158,7 +158,6 @@
 
     <div id="appContainer" class="w-full max-w-lg mx-auto">
 
-        <!-- Screen 1: User Info -->
         <div id="userInfoScreen" class="screen active-screen bg-gradient-to-br from-blue-400 to-indigo-600 p-6 rounded-lg shadow-xl">
             <div class="bg-white p-8 rounded-lg shadow-md w-full">
                 <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Selamat Datang!</h1>
@@ -199,7 +198,6 @@
             </div>
         </div>
 
-        <!-- Screen 1.5: Reminder Screen -->
         <div id="reminderScreen" class="screen bg-gradient-to-br from-yellow-300 to-orange-500 p-6 rounded-lg shadow-xl">
             <div class="bg-white p-8 rounded-lg shadow-md w-full text-center">
                 <h2 class="text-3xl font-bold text-orange-700 mb-6">Peringatan Penting!</h2>
@@ -219,17 +217,14 @@
         </div>
 
 
-        <!-- Screen 2: Issue Selection -->
         <div id="issueSelectionScreen" class="screen bg-gradient-to-br from-green-400 to-teal-600 p-6">
             <h2 class="text-3xl font-bold text-white text-center mb-2">Pilih Isu</h2>
             <p class="text-white text-center mb-8">Klik pada salah satu kad isu di bawah.</p>
             <div id="issueCardContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                <!-- Issue cards will be populated here by JavaScript -->
-            </div>
+                </div>
              <button id="refreshIssuesButton" class="mt-8 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">Segarkan Isu</button>
         </div>
 
-        <!-- Screen 3: Envelope Reveal & Prep Countdown -->
         <div id="envelopeScreen" class="screen bg-gradient-to-br from-amber-400 to-orange-600 p-6">
             <h2 class="text-3xl font-bold text-white text-center mb-6">Isu Anda!</h2>
             <div id="envelope" class="envelope mx-auto mb-6">
@@ -243,7 +238,6 @@
             <p id="prepMessage" class="text-white text-center text-sm"></p>
         </div>
 
-        <!-- Screen 4: Speaking Turn -->
         <div id="speakingTurnScreen" class="screen bg-gradient-to-br from-purple-400 to-pink-600 p-6">
             <div id="mcGreeting" class="text-2xl font-semibold text-white text-center mb-6"></div>
             <p class="text-white text-center text-lg mb-2">Masa Anda Bercakap:</p>
@@ -251,7 +245,6 @@
             <p id="speakMessage" class="text-white text-center text-sm"></p>
         </div>
 
-        <!-- Screen 5: Self Rating -->
         <div id="ratingScreen" class="screen bg-gradient-to-br from-red-400 to-rose-600 p-6">
             <div class="bg-white p-8 rounded-lg shadow-md w-full">
                 <h2 class="text-2xl font-bold text-center text-rose-700 mb-6">Nilaikan Prestasi Anda</h2>
@@ -262,7 +255,6 @@
             </div>
         </div>
 
-        <!-- Screen 6: Post-Rating Options -->
         <div id="optionsScreen" class="screen bg-gradient-to-br from-sky-400 to-cyan-600 p-6">
             <div class="bg-white p-8 rounded-lg shadow-md w-full text-center">
                 <h2 class="text-2xl font-bold text-cyan-700 mb-4">Penilaian Diterima!</h2>
@@ -276,7 +268,6 @@
             </div>
         </div>
 
-        <!-- Screen 7: Contoh Isi -->
         <div id="contohIsiScreen" class="screen bg-gradient-to-br from-lime-400 to-emerald-600 p-6">
             <div class="bg-white p-8 rounded-lg shadow-md w-full max-h-[90vh] overflow-y-auto">
                 <h2 class="text-2xl font-bold text-emerald-700 mb-6 text-center">Contoh Isi & Perkataan Sukar</h2>
@@ -295,7 +286,6 @@
             </div>
         </div>
 
-        <!-- Screen 8: Game Overview -->
         <div id="overviewScreen" class="screen bg-gradient-to-br from-violet-400 to-fuchsia-600 p-6">
              <div class="bg-white p-8 rounded-lg shadow-md w-full text-center">
                 <h2 class="text-2xl font-bold text-fuchsia-700 mb-6">Rumusan Simulasi</h2>
@@ -313,7 +303,6 @@
         </div>
     </div>
 
-    <!-- Custom Modal Structure -->
     <div id="customModal" class="modal">
         <div class="modal-content">
             <p id="modalMessage" class="text-lg text-gray-700 mb-4"></p>
@@ -321,24 +310,16 @@
         </div>
     </div>
 
-    <!-- Initialize the global data object FIRST -->
     <script>
         var staticContohIsiData = {}; // Initialize as a global variable
     </script>
 
-    <!-- Include the static thematic data files -->
-    <!-- You will create these files (e.g., data_pendidikan.js, data_kesihatan_mental.js) -->
-    <!-- and populate them with the example content for each theme. -->
-    <script src="data_pendidikan.js"></script> 
-    <script src="data_kesihatan_mental.js"></script>
-    <script src="data_sosial_perhubungan.js"></script>
-    <script src="data_teknologi_media.js"></script>
-    <script src="data_kesihatan_fizikal.js"></script>
-    <script src="data_keselamatan.js"></script>
-    <script src="data_pembangunan_diri.js"></script>
-    <script src="data_keluarga_persekitaran.js"></script>
-    <script src="data_kewangan.js"></script>
-    <!-- Add more <script src="data_your_theme.js"></script> lines as needed -->
+    <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_pendidikan.js"></script>
+    <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_kesihatan.js"></script> 
+    <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_sosial.js"></script> 
+    <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_teknologi.js"></script> 
+    <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_kesihatan_fizikal_dan_keselamatan_jalanraya.js"></script>
+    <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_diri_dan_kekeluargaan.js"></script>
 
 
 <script>
@@ -417,8 +398,8 @@
     let prepTimerInterval, speakTimerInterval;
     let bellSound;
 
-    // The allIssues array still defines all possible issues that can be selected.
-    // The example content for these issues will be in the separate thematic JS files.
+    // The allIssues array should contain ALL possible issues from your data files.
+    // Ensure this list is comprehensive and matches the keys in staticContohIsiData.
     const allIssues = [ 
         "Tekanan Akademik: Tekanan tinggi untuk cemerlang dalam peperiksaan (contohnya SPM).",
         "Beban Kerja Sekolah yang Berat: Terlalu banyak kerja rumah dan tugasan sekolah.",
@@ -503,8 +484,16 @@
                 envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
             }).toDestination();
         }
-        bellSound.triggerAttackRelease("C5", "8n", Tone.now());
-        bellSound.triggerAttackRelease("G5", "8n", Tone.now() + 0.2);
+        // Ensure Tone.js is ready before playing sound
+        if (Tone.context.state !== 'running') {
+            Tone.start().then(() => {
+                 bellSound.triggerAttackRelease("C5", "8n", Tone.now());
+                 bellSound.triggerAttackRelease("G5", "8n", Tone.now() + 0.2);
+            });
+        } else {
+            bellSound.triggerAttackRelease("C5", "8n", Tone.now());
+            bellSound.triggerAttackRelease("G5", "8n", Tone.now() + 0.2);
+        }
     }
     
     function showModal(message) {
@@ -646,15 +635,16 @@
         contohIsiText.innerHTML = '';
         perkataanSukarList.innerHTML = '';
         perkataanSukarSection.style.display = 'none';
-        contohIsiLoading.style.display = 'none'; 
+        contohIsiLoading.style.display = 'none'; // Initially hide, or 'flex' to show if needed
 
         const issueKey = gameData.currentIssueText;
         const roleKey = gameData.role.toLowerCase(); 
 
-        // Check if staticContohIsiData is defined (it should be by the included files)
         if (typeof staticContohIsiData !== 'undefined' && staticContohIsiData[issueKey] && staticContohIsiData[issueKey][roleKey]) {
             const data = staticContohIsiData[issueKey][roleKey];
             let hujahContent = data.hujah || "Tiada contoh hujah tersedia untuk isu ini.";
+            
+            // Convert \n to <br> first
             hujahContent = hujahContent.replace(/\n/g, '<br>');
             
             const labelsToBold = [
@@ -663,8 +653,11 @@
             ];
 
             labelsToBold.forEach(label => {
-                const regex = new RegExp(`(^|&lt;br&gt;\\s*)(${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                hujahContent = hujahContent.replace(regex, (match, p1, p2) => `${p1}<strong class="text-emerald-700">${p2}</strong>`);
+                const escapedLabel = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special characters in label
+                const regex = new RegExp(`(^|<br>\\s*)(${escapedLabel})`, 'gi'); // Corrected regex
+                hujahContent = hujahContent.replace(regex, (match, p1, p2) => {
+                    return `${p1}<strong class="text-emerald-700">${p2}</strong>`;
+                });
             });
             
             contohIsiText.innerHTML = hujahContent;
@@ -680,7 +673,7 @@
                 perkataanSukarSection.style.display = 'none';
             }
         } else {
-            contohIsiText.innerHTML = `<p class="text-orange-500">Maaf, contoh isi untuk isu ini atau peranan ini belum tersedia dalam data tempatan.</p>`;
+            contohIsiText.innerHTML = `<p class="text-orange-500">Maaf, contoh isi untuk isu '${issueKey}' bagi peranan '${gameData.role}' belum tersedia.</p>`;
             perkataanSukarSection.style.display = 'none';
         }
     }
@@ -724,16 +717,6 @@
             button.classList.add('selected');
         });
         ratingButtonsContainer.appendChild(button);
-    }
-    
-    if (!document.getElementById('issueTextInEnvelope')) {
-        const envelopeContent = document.querySelector('#envelopeScreen .envelope-content');
-        if (envelopeContent) {
-            const textDiv = document.createElement('div');
-            textDiv.id = 'issueTextInEnvelope';
-            textDiv.className = 'text-gray-700'; 
-            envelopeContent.appendChild(textDiv);
-        }
     }
     
     contohIsiLoading.style.display = 'none'; 
