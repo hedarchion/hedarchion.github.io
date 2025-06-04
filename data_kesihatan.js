@@ -4,108 +4,208 @@ if (typeof staticContohIsiData === 'undefined') {
     var staticContohIsiData = {};
 }
 
-// Add new data for "Kesihatan Mental dan Emosi Pelajar"
+// Add new data for "Kesihatan Mental dan Emosi Pelajar" (Items 16-25)
 // Use Object.assign to merge the new Kesihatan Mental-specific data
 // into the global staticContohIsiData object.
 Object.assign(staticContohIsiData, {
     "Stres/Tekanan: Stres berkaitan akademik, sosial, atau keluarga.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam sejahtera dan salam ketenangan jiwa. Selamat datang ke forum yang akan membincangkan isu kesejahteraan pelajar kita.\n\nPENGENALAN ISU: Isu yang akan kita kupas dengan mendalam ialah 'Stres atau Tekanan' yang dihadapi oleh pelajar. Stres ini boleh berpunca daripada pelbagai aspek kehidupan mereka, sama ada berkaitan akademik, sosial, atau masalah keluarga.\n\nLATAR BELAKANG ISU: Pelajar hari ini berdepan dengan pelbagai tuntutan – harapan tinggi dalam pelajaran, persaingan dengan rakan sebaya, cabaran dalam perhubungan sosial, konflik keluarga, malah tekanan daripada media sosial. Akumulasi stres ini boleh memberi kesan kepada kesihatan mental dan fizikal mereka.\n\nKEPENTINGAN ISU: Stres yang tidak diurus dengan baik boleh membawa kepada masalah yang lebih serius seperti kebimbangan (anxiety), kemurungan, masalah tingkah laku, penurunan prestasi akademik, dan isu kesihatan. Oleh itu, penting untuk kita memahami dan menanganinya.\n\nSOALAN FOKUS: Persoalan yang ingin saya ajukan: Apakah tanda-tanda stres dalam kalangan pelajar yang perlu diberi perhatian oleh guru dan ibu bapa? Dan apakah mekanisme sokongan serta strategi daya tindak yang efektif untuk membantu pelajar mengurus stres?",
+            perkataan_sukar: [
+                { perkataan: "Akumulasi", maksud: "Pengumpulan atau penimbunan." },
+                { perkataan: "Kebimbangan (Anxiety)", maksud: "Perasaan risau, gelisah, atau takut yang berlebihan." },
+                { perkataan: "Mekanisme sokongan", maksud: "Sistem atau cara yang disediakan untuk memberi bantuan atau sokongan." },
+                { perkataan: "Strategi daya tindak", maksud: "Cara atau kaedah untuk menghadapi atau mengatasi sesuatu masalah (coping strategies)." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Saudara Pengerusi. Isu stres dalam kalangan pelajar adalah satu realiti yang tidak boleh dipandang enteng dalam masyarakat moden yang serba pantas ini.\n\nPENDAPAT: Saya berpendapat bahawa pengurusan stres yang efektif perlu menjadi satu kemahiran hidup yang diajar dan dipupuk sejak peringkat awal. Ini melibatkan usaha bersepadu daripada pihak sekolah, keluarga, dan pelajar itu sendiri.\n\nALASAN: Alasan saya adalah kerana stres adalah tindak balas semula jadi terhadap tekanan, tetapi stres yang kronik atau melampau boleh memudaratkan. Pelajar perlu dilengkapi dengan pengetahuan untuk mengenali punca stres dan kemahiran untuk menanganinya secara sihat, bukan dengan cara yang merosakkan diri.\n\nTANGGAPAN: Ada yang mungkin menganggap stres itu sebahagian daripada proses pendewasaan dan pelajar perlu belajar menanganinya sendiri. Walaupun kemandirian itu penting, pelajar, terutamanya remaja, masih memerlukan bimbingan dan sokongan untuk membina daya tahan mental.\n\nRUJUKAN: Penyelidikan dalam bidang psikologi kesihatan menunjukkan bahawa teknik-teknik seperti latihan kesedaran (mindfulness), pengurusan masa yang baik, senaman fizikal secara berkala, dan mendapatkan tidur yang cukup adalah antara strategi yang berkesan untuk mengurangkan stres.\n\nIMPLIKASI: Stres yang tidak terurus boleh membawa kepada pelbagai masalah kesihatan mental seperti kemurungan dan gangguan kebimbangan, menjejaskan tumpuan dan pembelajaran, merosakkan hubungan sosial, dan dalam kes-kes ekstrem, boleh membawa kepada pemikiran untuk mencederakan diri.\n\nKESIMPULAN: Kesimpulannya, adalah penting untuk mewujudkan persekitaran yang menyokong di sekolah dan di rumah. Ini termasuk mengurangkan tekanan yang tidak perlu, menyediakan akses kepada khidmat kaunseling, mengajar teknik relaksasi, dan menggalakkan komunikasi terbuka mengenai perasaan dan masalah yang dihadapi.",
+            perkataan_sukar: [
+                { perkataan: "Enteng", maksud: "Ringan atau mudah; tidak dianggap serius." },
+                { perkataan: "Kronik", maksud: "Berpanjangan atau berlaku secara berulang-ulang." },
+                { perkataan: "Kemandirian", maksud: "Keupayaan untuk berdikari atau tidak bergantung kepada orang lain." },
+                { perkataan: "Relaksasi", maksud: "Keadaan tenang dan rehat; proses mengurangkan ketegangan." }
+            ]
         }
     },
     "Kebimbangan/Anxieti: Perasaan risau yang berlebihan mengenai pelbagai perkara.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam damai dan salam prihatin. Kita berkumpul hari ini untuk membincangkan isu kesihatan mental yang semakin mendapat perhatian, iaitu kebimbangan atau anxieti.\n\nPENGENALAN ISU: Isu yang akan kita fokuskan ialah 'Kebimbangan atau Anxieti' dalam kalangan pelajar. Ini merujuk kepada perasaan risau, gelisah, atau takut yang berlebihan dan sukar dikawal, yang boleh mengganggu kehidupan seharian mereka.\n\nLATAR BELAKANG ISU: Anxieti boleh dicetuskan oleh pelbagai faktor seperti tekanan peperiksaan, kebimbangan sosial (takut dihakimi), perubahan besar dalam hidup, trauma masa lalu, atau ketidakpastian mengenai masa depan. Ada juga faktor genetik dan biologi yang boleh memainkan peranan.\n\nKEPENTINGAN ISU: Anxieti bukan sekadar 'rasa gementar biasa'. Jika ia kronik dan teruk, ia boleh menjejaskan tumpuan belajar, penyertaan dalam aktiviti sosial, tidur, selera makan, dan kesihatan fizikal secara keseluruhan. Ia adalah satu keadaan kesihatan mental yang memerlukan perhatian.\n\nSOALAN FOKUS: Persoalan yang ingin saya kemukakan: Bagaimana kita boleh meningkatkan kesedaran mengenai anxieti dalam kalangan pelajar, guru, dan ibu bapa? Apakah langkah-langkah intervensi awal dan rawatan yang boleh diakses untuk membantu pelajar yang mengalami anxieti?",
+            perkataan_sukar: [
+                { perkataan: "Anxieti", maksud: "Gangguan mental yang dicirikan oleh perasaan risau, takut, atau gelisah yang berlebihan dan berterusan." },
+                { perkataan: "Sosial", maksud: "Berkaitan dengan masyarakat atau interaksi antara individu." },
+                { perkataan: "Trauma", maksud: "Pengalaman yang sangat menyakitkan atau mengejutkan yang meninggalkan kesan emosi yang mendalam." },
+                { perkataan: "Intervensi", maksud: "Tindakan atau proses campur tangan untuk mengubah sesuatu keadaan." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Tuan Pengerusi. Anxieti adalah salah satu cabaran kesihatan mental yang paling lazim dihadapi oleh golongan muda, dan kita perlu menanganinya dengan empati dan pengetahuan.\n\nPENDAPAT: Saya berpendapat bahawa usaha untuk menangani anxieti dalam kalangan pelajar memerlukan pendekatan pelbagai serampang, termasuk pendidikan kesihatan mental, saringan awal, penyediaan khidmat sokongan yang mudah diakses, dan pengurangan stigma.\n\nALASAN: Ini kerana ramai pelajar yang mengalami anxieti mungkin tidak menyedari keadaan mereka atau takut untuk meminta bantuan kerana bimbang akan stigma atau tidak tahu ke mana hendak dituju. Anxieti yang tidak dirawat boleh menjadi lebih teruk dan menjejaskan potensi pelajar.\n\nTANGGAPAN: Ada yang mungkin menganggap pelajar yang risau itu hanya 'lemah semangat' atau 'terlalu banyak berfikir'. Persepsi sebegini adalah salah dan boleh menghalang pelajar daripada mendapatkan bantuan yang mereka perlukan.\n\nRUJUKAN: Terapi tingkah laku kognitif (CBT) adalah salah satu rawatan psikoterapi yang terbukti berkesan untuk gangguan anxieti. Ia membantu individu mengenal pasti dan mengubah corak pemikiran negatif serta tingkah laku yang menyumbang kepada kebimbangan.\n\nIMPLIKASI: Anxieti yang tidak ditangani boleh membawa kepada pengasingan diri, masalah akademik, penyalahgunaan bahan, kemurungan, dan kualiti hidup yang merosot. Ia juga boleh memberi kesan kepada hubungan dengan keluarga dan rakan-rakan.\n\nKESIMPULAN: Oleh itu, adalah penting untuk mewujudkan persekitaran sekolah yang menyokong kesihatan mental. Ini termasuk melatih guru untuk mengenali tanda-tanda awal anxieti, menyediakan kaunselor yang mahir, mengadakan kempen kesedaran, dan menggalakkan budaya di mana pelajar berasa selamat untuk bercakap tentang masalah mereka.",
+            perkataan_sukar: [
+                { perkataan: "Lazim", maksud: "Biasa atau umum berlaku." },
+                { perkataan: "Pelbagai serampang", maksud: "Melibatkan banyak aspek atau cara." },
+                { perkataan: "Stigma", maksud: "Tanggapan negatif atau rasa malu yang dikaitkan dengan sesuatu keadaan." },
+                { perkataan: "Psikoterapi", maksud: "Rawatan masalah emosi atau mental melalui kaedah psikologi." }
+            ]
         }
     },
     "Kemurungan/Depresi: Perasaan sedih yang berpanjangan dan kehilangan minat.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam harapan dan salam kefahaman. Kita bertemu untuk membincangkan satu lagi isu kesihatan mental yang serius, iaitu kemurungan atau depresi.\n\nPENGENALAN ISU: Isu yang akan kita bincangkan ialah 'Kemurungan/Depresi' dalam kalangan pelajar. Ini bukan sekadar perasaan sedih biasa, tetapi satu keadaan kesihatan mental yang dicirikan oleh kesedihan yang berpanjangan, kehilangan minat atau keseronokan dalam aktiviti harian, dan gejala-gejala lain yang menjejaskan fungsi.\n\nLATAR BELAKANG ISU: Kemurungan boleh disebabkan oleh gabungan faktor genetik, biologi (ketidakseimbangan kimia dalam otak), persekitaran (seperti stres kronik, trauma, kehilangan), dan faktor psikologi (seperti corak pemikiran negatif). Tekanan akademik dan sosial juga boleh menjadi penyumbang.\n\nKEPENTINGAN ISU: Kemurungan adalah satu penyakit yang boleh dirawat, tetapi jika dibiarkan, ia boleh membawa kesan buruk kepada semua aspek kehidupan pelajar – pelajaran, hubungan, kesihatan fizikal, dan dalam kes yang paling teruk, boleh membawa kepada pemikiran untuk mencederakan diri atau bunuh diri.\n\nSOALAN FOKUS: Persoalan penting untuk kita renungkan: Bagaimanakah kita dapat membezakan antara kesedihan biasa dengan kemurungan klinikal? Apakah peranan sekolah dan keluarga dalam mengesan tanda-tanda awal kemurungan dan membantu pelajar mendapatkan rawatan yang sewajarnya?",
+            perkataan_sukar: [
+                { perkataan: "Depresi", maksud: "Gangguan mood yang menyebabkan perasaan sedih dan kehilangan minat yang berterusan." },
+                { perkataan: "Berpanjangan", maksud: "Berlanjutan untuk tempoh masa yang lama." },
+                { perkataan: "Klinikal", maksud: "Berkaitan dengan pemerhatian dan rawatan pesakit secara langsung." },
+                { perkataan: "Sewajarnya", maksud: "Sepatutnya atau selayaknya." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Saudari Pengerusi. Kemurungan dalam kalangan remaja adalah satu kebimbangan global yang memerlukan tindakan segera dan belas kasihan.\n\nPENDAPAT: Saya berpendapat bahawa usaha memerangi kemurungan memerlukan pendekatan holistik yang merangkumi peningkatan kesedaran, saringan awal, akses kepada rawatan profesional, sokongan berterusan, dan pengurangan stigma yang seringkali menghalang individu daripada mencari bantuan.\n\nALASAN: Ini kerana kemurungan adalah satu penyakit yang kompleks. Pelajar yang mengalaminya seringkali berasa bersendirian, tidak difahami, atau malu. Tanpa sokongan dan rawatan yang betul, mereka mungkin terus menderita dalam diam dan keadaan mereka boleh menjadi lebih buruk.\n\nTANGGAPAN: Ada yang mungkin tersalah anggap bahawa kemurungan adalah tanda kelemahan peribadi atau boleh diatasi dengan 'berfikiran positif' semata-mata. Ini adalah salah faham yang berbahaya dan meremehkan keseriusan penyakit ini.\n\nRUJUKAN: Pertubuhan Kesihatan Sedunia (WHO) mengiktiraf kemurungan sebagai salah satu punca utama hilang upaya di seluruh dunia. Rawatan yang berkesan biasanya melibatkan gabungan psikoterapi (seperti CBT atau terapi interpersonal) dan, dalam sesetengah kes, ubat-ubatan antidepresan di bawah pengawasan doktor.\n\nIMPLIKASI: Kemurungan yang tidak dirawat boleh membawa kepada pencapaian akademik yang merosot, masalah tingkah laku, pengasingan sosial, peningkatan risiko penyalahgunaan bahan, dan yang paling membimbangkan, peningkatan risiko bunuh diri. Ia juga memberi kesan kepada keluarga dan rakan-rakan.\n\nKESIMPULAN: Kesimpulannya, kita semua mempunyai peranan dalam membantu pelajar yang berjuang dengan kemurungan. Sekolah perlu menjadi persekitaran yang selamat dan menyokong, guru perlu peka, ibu bapa perlu lebih terbuka untuk berbincang mengenai kesihatan mental, dan masyarakat perlu menghapuskan stigma. Bantuan profesional adalah kunci kepada pemulihan.",
+            perkataan_sukar: [
+                { perkataan: "Holistik", maksud: "Menyeluruh, mempertimbangkan semua aspek." },
+                { perkataan: "Saringan", maksud: "Pemeriksaan awal untuk mengesan sesuatu penyakit atau masalah." },
+                { perkataan: "Meremehkan", maksud: "Menganggap ringan atau tidak penting." },
+                { perkataan: "Antidepresan", maksud: "Ubat yang digunakan untuk merawat kemurungan." }
+            ]
         }
     },
     "Pemikiran untuk Mencederakan Diri/Bunuh Diri: Isu kesihatan mental yang serius.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam harapan dan salam kehidupan. Kita bertemu dalam suasana serius untuk membincangkan isu yang amat kritikal dan memerlukan perhatian segera dari kita semua.\n\nPENGENALAN ISU: Isu yang akan kita hadapi dengan penuh tanggungjawab ialah 'Pemikiran untuk Mencederakan Diri atau Bunuh Diri' dalam kalangan pelajar. Ini adalah satu krisis kesihatan mental yang memerlukan tindakan pencegahan dan intervensi segera.\n\nLATAR BELAKANG ISU: Pemikiran sebegini seringkali berakar umbi daripada penderitaan emosi yang mendalam, seperti kemurungan yang teruk, anxieti yang melampau, rasa putus asa, pengalaman trauma, buli, atau tekanan hidup yang tidak tertanggung. Ia bukanlah satu pilihan, tetapi tanda kesakitan yang amat sangat.\n\nKEPENTINGAN ISU: Setiap nyawa adalah berharga. Isu ini amat penting kerana ia melibatkan kehilangan nyawa yang boleh dicegah. Mengabaikan tanda-tanda amaran atau tidak menyediakan sokongan yang mencukupi boleh membawa kepada tragedi yang tidak dapat ditarik balik.\n\nSOALAN FOKUS: Persoalan yang paling mendesak: Apakah tanda-tanda amaran yang perlu kita waspadai? Bagaimanakah kita, sebagai individu, sekolah, dan komuniti, boleh bertindak untuk mencegah bunuh diri dan membantu mereka yang berisiko?",
+            perkataan_sukar: [
+                { perkataan: "Kritikal", maksud: "Sangat penting atau genting." },
+                { perkataan: "Intervensi", maksud: "Tindakan campur tangan untuk memperbaiki keadaan." },
+                { perkataan: "Berakar umbi", maksud: "Mempunyai punca yang mendalam." },
+                { perkataan: "Mendesak", maksud: "Sangat perlu atau mustahak." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Tuan Moderator. Ini adalah topik yang amat berat, tetapi perbincangan terbuka adalah langkah pertama ke arah pencegahan dan penyembuhan.\n\nPENDAPAT: Saya berpendapat bahawa pencegahan bunuh diri memerlukan usaha kolektif dan proaktif, bermula dengan memecahkan kesenyapan dan stigma yang menyelubungi isu ini, serta memastikan bantuan profesional mudah diakses oleh mereka yang memerlukan.\n\nALASAN: Alasan saya adalah kerana individu yang mempunyai pemikiran untuk bunuh diri seringkali merasa terasing dan percaya bahawa tiada siapa yang dapat membantu atau memahami mereka. Menyediakan ruang yang selamat untuk mereka meluahkan perasaan tanpa dihakimi dan menghubungkan mereka dengan bantuan profesional boleh menyelamatkan nyawa.\n\nTANGGAPAN: Ada mitos bahawa bercakap tentang bunuh diri akan menggalakkan perbuatan itu. Ini adalah salah sama sekali. Sebaliknya, perbincangan yang bertanggungjawab dan penuh empati boleh membuka jalan untuk bantuan dan mengurangkan risiko.\n\nRUJUKAN: Garis panduan antarabangsa mengenai pencegahan bunuh diri menekankan kepentingan mengenal pasti individu berisiko, menyediakan sokongan krisis, mengehadkan akses kepada kaedah bunuh diri, dan memberi sokongan jangka panjang kepada mereka yang terjejas serta keluarga mereka.\n\nIMPLIKASI: Implikasi daripada kegagalan menangani isu ini adalah kehilangan nyawa generasi muda yang berharga, kesedihan dan trauma yang mendalam kepada keluarga dan komuniti, serta kesan riak kepada rakan sebaya.\n\nKESIMPULAN: Kesimpulannya, kita tidak boleh berdiam diri. Sekolah perlu mempunyai protokol krisis yang jelas, guru dan kaunselor perlu dilatih untuk mengenal pasti tanda amaran dan memberi respons yang sesuai, talian bantuan perlu dihebahkan, dan ibu bapa perlu lebih peka. Setiap usaha, sekecil mana pun, untuk mendekati dan membantu adalah penting.",
+            perkataan_sukar: [
+                { perkataan: "Kolektif", maksud: "Dilakukan bersama-sama oleh satu kumpulan." },
+                { perkataan: "Proaktif", maksud: "Bertindak lebih awal untuk mengawal keadaan." },
+                { perkataan: "Menyelubungi", maksud: "Meliputi atau melingkungi." },
+                { perkataan: "Protokol", maksud: "Peraturan atau tatacara rasmi yang perlu diikuti." }
+            ]
         }
     },
     "Harga Diri Rendah: Kurang keyakinan diri dan pandangan negatif terhadap diri sendiri.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam positif dan salam membina. Selamat datang ke forum kita yang akan meneroka aspek penting dalam pembentukan sahsiah, iaitu harga diri.\n\nPENGENALAN ISU: Isu yang akan kita perbincangkan ialah 'Harga Diri Rendah' dalam kalangan pelajar. Ini merujuk kepada keadaan di mana pelajar mempunyai kurang keyakinan terhadap kebolehan diri dan pandangan yang umumnya negatif terhadap diri mereka sendiri.\n\nLATAR BELAKANG ISU: Harga diri rendah boleh berpunca daripada pelbagai faktor, termasuk kritikan yang berterusan daripada orang sekeliling, pengalaman kegagalan, perbandingan sosial (terutamanya melalui media sosial), menjadi mangsa buli, atau standard diri yang tidak realistik.\n\nKEPENTINGAN ISU: Harga diri yang sihat adalah asas kepada kesejahteraan mental dan kejayaan dalam hidup. Pelajar dengan harga diri rendah mungkin menghadapi kesukaran untuk mencapai potensi penuh mereka, membentuk hubungan yang sihat, dan mengatasi cabaran.\n\nSOALAN FOKUS: Persoalan yang ingin saya kemukakan: Bagaimanakah kita dapat membantu pelajar membina harga diri yang positif dan sihat? Apakah peranan guru, ibu bapa, dan rakan sebaya dalam memupuk persekitaran yang menyokong pembentukan harga diri?",
+            perkataan_sukar: [
+                { perkataan: "Sahsiah", maksud: "Keperibadian atau watak." },
+                { perkataan: "Realistik", maksud: "Berdasarkan kenyataan atau keadaan sebenar." },
+                { perkataan: "Potensi", maksud: "Kebolehan atau keupayaan yang terpendam." },
+                { perkataan: "Memupuk", maksud: "Mengembangkan atau memelihara sesuatu (sifat baik, minat dsb)." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Saudara Pengerusi. Harga diri adalah teras kepada bagaimana seseorang individu melihat dan menilai dirinya, dan ia memberi impak besar kepada setiap aspek kehidupan.\n\nPENDAPAT: Saya berpendapat bahawa usaha untuk membina harga diri pelajar memerlukan pendekatan yang memberi tumpuan kepada pengiktirafan usaha dan pencapaian (walaupun kecil), menyediakan peluang untuk berjaya, dan mengajar kemahiran untuk menangani kritikan serta kegagalan secara konstruktif.\n\nALASAN: Ini kerana harga diri tidak terbentuk dalam sekelip mata. Ia dipupuk melalui pengalaman positif, maklum balas yang membina, dan penerimaan diri. Pelajar yang sentiasa merasa diri mereka tidak cukup baik akan sukar untuk percaya pada kebolehan mereka.\n\nTANGGAPAN: Ada yang mungkin berfikir bahawa memuji pelajar secara berlebihan akan menjadikan mereka manja atau sombong. Namun, pujian yang ikhlas dan spesifik terhadap usaha atau tingkah laku yang baik adalah penting untuk membina keyakinan, berbeza dengan pujian kosong.\n\nRUJUKAN: Teori psikologi seperti Hierarki Keperluan Maslow meletakkan keperluan penghargaan (esteem needs) sebagai salah satu keperluan asas manusia. Apabila keperluan ini dipenuhi, individu lebih cenderung untuk mencapai aktualisasi diri.\n\nIMPLIKASI: Harga diri rendah boleh menyebabkan pelajar mengelak daripada cabaran, takut mengambil risiko, mudah dipengaruhi secara negatif, menghadapi masalah dalam perhubungan sosial, dan lebih terdedah kepada masalah kesihatan mental seperti kemurungan dan anxieti.\n\nKESIMPULAN: Kesimpulannya, sekolah dan rumah perlu menjadi tempat di mana pelajar merasa dihargai, diterima seadanya, dan diberi peluang untuk menyerlahkan kekuatan mereka. Aktiviti yang menggalakkan penerokaan diri, penetapan matlamat yang realistik, dan meraikan kepelbagaian bakat boleh membantu memupuk harga diri yang sihat.",
+            perkataan_sukar: [
+                { perkataan: "Konstruktif", maksud: "Membina atau memberi faedah." },
+                { perkataan: "Spesifik", maksud: "Khusus atau tertentu." },
+                { perkataan: "Aktualisasi diri", maksud: "Proses merealisasikan potensi diri sepenuhnya." },
+                { perkataan: "Menyerlahkan", maksud: "Menampakkan atau menunjukkan dengan jelas." }
+            ]
         }
     },
     "Kelesuan Emosi: Keletihan emosi akibat tekanan yang berpanjangan.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam sejahtera dan salam pemulihan. Kita bertemu hari ini untuk membincangkan satu keadaan yang mungkin dialami ramai tetapi kurang difahami, iaitu kelesuan emosi.\n\nPENGENALAN ISU: Isu yang akan kita terokai ialah 'Kelesuan Emosi' atau 'emotional burnout'. Ini merujuk kepada keadaan keletihan emosi, mental, dan fizikal yang disebabkan oleh stres yang berpanjangan atau keterlaluan, lazimnya berkaitan dengan tuntutan akademik atau tanggungjawab lain.\n\nLATAR BELAKANG ISU: Pelajar boleh mengalami kelesuan emosi akibat beban kerja sekolah yang berat, tekanan peperiksaan yang berterusan, kekurangan rehat dan tidur yang mencukupi, serta kurangnya sokongan sosial atau mekanisme daya tindak yang sihat.\n\nKEPENTINGAN ISU: Kelesuan emosi bukan sekadar rasa letih biasa. Ia boleh menjejaskan motivasi, tumpuan, prestasi akademik, kesihatan fizikal, dan hubungan interpersonal. Jika tidak ditangani, ia boleh membawa kepada masalah kesihatan mental yang lebih serius.\n\nSOALAN FOKUS: Persoalan untuk kita bincangkan: Apakah tanda-tanda kelesuan emosi yang perlu kita kenal pasti dalam kalangan pelajar? Dan bagaimanakah kita boleh membantu pelajar mencegah atau mengatasi kelesuan emosi serta mempromosikan keseimbangan hidup?",
+            perkataan_sukar: [
+                { perkataan: "Kelesuan emosi (Emotional burnout)", maksud: "Keadaan keletihan emosi, mental, dan fizikal akibat stres berpanjangan." },
+                { perkataan: "Interpersonal", maksud: "Antara individu dengan individu lain." },
+                { perkataan: "Mekanisme daya tindak", maksud: "Cara atau kaedah untuk menghadapi atau mengatasi masalah." },
+                { perkataan: "Mempromosikan", maksud: "Menggalakkan atau menyokong." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Tuan Moderator. Kelesuan emosi adalah satu sindrom yang semakin dikenali, terutamanya dalam persekitaran yang berdaya saing tinggi seperti alam akademik.\n\nPENDAPAT: Saya berpendapat bahawa pencegahan kelesuan emosi adalah lebih baik daripada merawat. Ini memerlukan kesedaran tentang kepentingan penjagaan diri (self-care), penetapan sempadan yang sihat, dan pengurusan stres yang efektif.\n\nALASAN: Ini kerana kelesuan emosi berlaku secara beransur-ansur dan sering tidak disedari sehingga ia menjadi teruk. Apabila seseorang sudah mengalami kelesuan emosi, proses pemulihan boleh mengambil masa yang lama. Oleh itu, langkah pencegahan adalah amat penting.\n\nTANGGAPAN: Ada yang mungkin melihat pelajar yang mengadu letih sebagai kurang daya tahan atau manja. Namun, kita perlu faham bahawa setiap individu mempunyai had kemampuan masing-masing, dan tekanan yang berterusan tanpa rehat yang cukup boleh memudaratkan sesiapa sahaja.\n\nRUJUKAN: Konsep 'burnout' pada asalnya dikaji dalam konteks profesion membantu, tetapi kini diiktiraf berlaku dalam pelbagai bidang termasuk pelajar. Strategi pencegahan termasuklah pengurusan masa, aktiviti riadah, sokongan sosial, dan mendapatkan tidur yang berkualiti.\n\nIMPLIKASI: Kelesuan emosi boleh menyebabkan pelajar hilang minat terhadap pelajaran, menjadi sinis atau mudah marah, mengasingkan diri, mengalami masalah kesihatan fizikal seperti sakit kepala atau masalah penghadaman, dan penurunan produktiviti secara keseluruhan.\n\nKESIMPULAN: Kesimpulannya, adalah penting untuk mendidik pelajar tentang kepentingan keseimbangan antara belajar, berehat, dan beriadah. Sekolah boleh membantu dengan tidak membebankan pelajar secara keterlaluan dan menyediakan sumber untuk pengurusan stres. Ibu bapa juga berperanan memastikan anak-anak mendapat rehat yang cukup dan sokongan emosi.",
+            perkataan_sukar: [
+                { perkataan: "Sindrom", maksud: "Kumpulan gejala atau tanda yang mencirikan sesuatu penyakit atau keadaan." },
+                { perkataan: "Penjagaan diri (Self-care)", maksud: "Amalan menjaga kesihatan fizikal dan mental diri sendiri." },
+                { perkataan: "Beransur-ansur", maksud: "Sedikit demi sedikit atau secara berperingkat." },
+                { perkataan: "Sinis", maksud: "Bersifat mengejek atau tidak percaya kepada keikhlasan orang lain." }
+            ]
         }
     },
     "Kesunyian: Perasaan terasing atau kekurangan hubungan sosial yang bermakna.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam ukhuwah dan salam kepedulian. Selamat datang ke forum yang akan menyentuh satu aspek penting dalam kesejahteraan sosial pelajar, iaitu isu kesunyian.\n\nPENGENALAN ISU: Isu yang akan kita bincangkan ialah 'Kesunyian'. Ini bukan sekadar berseorangan secara fizikal, tetapi lebih kepada perasaan terasing, tidak difahami, atau kekurangan hubungan sosial yang bermakna dan memuaskan.\n\nLATAR BELAKANG ISU: Kesunyian dalam kalangan pelajar boleh disebabkan oleh pelbagai faktor seperti kesukaran untuk bersosial, baru berpindah ke persekitaran baru, menjadi mangsa buli, kehilangan rakan, atau terlalu banyak masa dihabiskan bersendirian dengan gajet.\n\nKEPENTINGAN ISU: Manusia adalah makhluk sosial. Kesunyian yang berpanjangan boleh memberi kesan negatif kepada kesihatan mental (seperti kemurungan dan anxieti), kesihatan fizikal, dan juga prestasi akademik. Ia boleh membuatkan pelajar merasa tidak bahagia dan tidak bersemangat.\n\nSOALAN FOKUS: Persoalan yang timbul: Bagaimanakah kita boleh membantu pelajar mengatasi perasaan kesunyian dan membina hubungan sosial yang sihat? Apakah peranan sekolah dan komuniti dalam mewujudkan persekitaran yang inklusif dan menggalakkan interaksi sosial yang positif?",
+            perkataan_sukar: [
+                { perkataan: "Ukhuwah", maksud: "Persaudaraan atau ikatan mesra." },
+                { perkataan: "Terasing", maksud: "Berasa tersisih atau jauh daripada orang lain." },
+                { perkataan: "Bermakna", maksud: "Mempunyai erti atau kepentingan." },
+                { perkataan: "Inklusif", maksud: "Merangkumi semua orang; tidak menyisihkan sesiapa." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Tuan Moderator. Kesunyian adalah satu pengalaman manusia yang universal, tetapi ia boleh menjadi sangat menyakitkan, terutamanya bagi golongan muda yang sedang membina identiti sosial mereka.\n\nPENDAPAT: Saya berpendapat bahawa usaha untuk menangani kesunyian memerlukan pendekatan yang memfokuskan kepada pembinaan kemahiran sosial, penyediaan peluang untuk interaksi yang positif, dan pemupukan budaya empati serta kepedulian dalam komuniti sekolah.\n\nALASAN: Ini kerana kesunyian seringkali berpunca daripada gabungan faktor individu (seperti rasa malu atau kurang kemahiran sosial) dan faktor persekitaran (seperti kurangnya aktiviti berkumpulan atau suasana yang tidak mesra). Kedua-dua aspek ini perlu ditangani.\n\nTANGGAPAN: Ada yang mungkin menganggap pelajar yang sunyi itu sengaja memilih untuk bersendirian atau anti-sosial. Namun, ramai yang sebenarnya teringin untuk berhubung tetapi tidak tahu bagaimana atau merasa takut ditolak.\n\nRUJUKAN: Kajian menunjukkan bahawa hubungan sosial yang kukuh adalah salah satu faktor pelindung utama untuk kesihatan mental. Program-program yang menggalakkan kerja berpasukan, aktiviti kokurikulum, dan khidmat masyarakat boleh membantu pelajar membina hubungan dan merasa menjadi sebahagian daripada komuniti.\n\nIMPLIKASI: Kesunyian yang kronik boleh membawa kepada harga diri rendah, kemurungan, penyalahgunaan bahan sebagai cara untuk melarikan diri, dan kesukaran untuk menyesuaikan diri dalam persekitaran sosial pada masa hadapan.\n\nKESIMPULAN: Kesimpulannya, adalah penting untuk mewujudkan sekolah sebagai komuniti yang penyayang dan inklusif. Guru boleh memainkan peranan dalam menggalakkan interaksi dalam bilik darjah, kaunselor boleh mengadakan bengkel kemahiran sosial, dan aktiviti sekolah perlu dirancang untuk memupuk semangat setiakawan. Mengajar pelajar untuk menjadi rakan yang baik juga adalah penting.",
+            perkataan_sukar: [
+                { perkataan: "Universal", maksud: "Meliputi atau berkaitan dengan semua orang atau semua perkara di dunia." },
+                { perkataan: "Empati", maksud: "Kebolehan untuk memahami dan berkongsi perasaan orang lain." },
+                { perkataan: "Faktor pelindung", maksud: "Sesuatu yang membantu mengurangkan risiko atau kesan negatif." },
+                { perkataan: "Setiakawan", maksud: "Perasaan setia dan saling membantu antara kawan." }
+            ]
         }
     },
     "Kesukaran Mengurus Emosi: Cabaran dalam mengawal kemarahan, kesedihan, atau kekecewaan.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam sejahtera dan salam kecerdasan emosi. Selamat datang ke forum yang akan membincangkan satu kemahiran hidup yang penting, iaitu pengurusan emosi.\n\nPENGENALAN ISU: Isu yang akan kita fokuskan ialah 'Kesukaran Mengurus Emosi'. Ini merujuk kepada cabaran yang dihadapi oleh pelajar dalam mengenali, memahami, dan mengawal perasaan seperti kemarahan, kesedihan, kekecewaan, atau stres secara sihat dan konstruktif.\n\nLATAR BELAKANG ISU: Kesukaran ini mungkin disebabkan oleh kurangnya pendedahan kepada pendidikan kecerdasan emosi, tiada contoh teladan yang baik dalam mengurus emosi, tekanan yang melampau, atau ketidakupayaan untuk meluahkan perasaan secara verbal.\n\nKEPENTINGAN ISU: Kemahiran mengurus emosi adalah asas kepada kesihatan mental yang baik, hubungan interpersonal yang positif, dan keupayaan untuk membuat keputusan yang rasional. Pelajar yang sukar mengurus emosi mungkin bertindak impulsif atau merosakkan diri.\n\nSOALAN FOKUS: Persoalan untuk kita bincangkan bersama: Bagaimanakah kita boleh membantu pelajar membina kemahiran pengurusan emosi yang lebih baik? Apakah peranan pendidikan formal dan tidak formal dalam memupuk kecerdasan emosi sejak usia muda?",
+            perkataan_sukar: [
+                { perkataan: "Kecerdasan emosi", maksud: "Keupayaan untuk mengenali, memahami, dan mengurus emosi diri sendiri dan orang lain." },
+                { perkataan: "Konstruktif", maksud: "Membina atau memberi faedah." },
+                { perkataan: "Contoh teladan", maksud: "Seseorang atau sesuatu yang patut dicontohi." },
+                { perkataan: "Impulsif", maksud: "Bertindak mengikut gerak hati tanpa berfikir panjang." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Tuan Moderator. Pengurusan emosi adalah satu aspek kritikal dalam pembangunan insan yang seimbang dan berdaya tahan.\n\nPENDAPAT: Saya berpendapat bahawa kemahiran mengurus emosi bukanlah sesuatu yang datang secara semula jadi bagi semua orang, tetapi ia boleh dipelajari dan dilatih. Pendidikan kecerdasan emosi perlu diintegrasikan dalam kurikulum dan budaya sekolah.\n\nALASAN: Ini kerana pelajar yang tidak pandai mengurus emosi negatif seperti kemarahan mungkin akan melepaskannya secara tidak terkawal, yang boleh membawa kepada konflik atau keganasan. Kesedihan yang tidak diurus pula boleh membawa kepada kemurungan. Emosi yang tidak terurus mengganggu tumpuan dan pembelajaran.\n\nTANGGAPAN: Ada yang mungkin menganggap bahawa menunjukkan emosi adalah tanda kelemahan, atau sebaliknya, melepaskan emosi secara bebas adalah lebih baik. Kedua-dua ekstrem ini tidak sihat. Yang penting adalah belajar mengurus dan meluahkan emosi dengan cara yang sesuai.\n\nRUJUKAN: Program-program Pembelajaran Sosial dan Emosi (SEL) yang dilaksanakan di sekolah-sekolah di banyak negara telah menunjukkan hasil positif dalam meningkatkan kemahiran emosi pelajar, mengurangkan masalah tingkah laku, dan meningkatkan prestasi akademik.\n\nIMPLIKASI: Kesukaran mengurus emosi boleh membawa kepada masalah perhubungan, kesukaran menyesuaikan diri dengan tekanan, tingkah laku berisiko, dan masalah kesihatan mental. Ia juga boleh menjejaskan keupayaan untuk bekerja dalam pasukan dan menyelesaikan masalah secara efektif.\n\nKESIMPULAN: Kesimpulannya, kita perlu memberi penekanan yang lebih kepada pembangunan kecerdasan emosi pelajar. Ini boleh dilakukan melalui pengajaran langsung, aktiviti main peranan, kaunseling, dan dengan guru serta ibu bapa menjadi contoh teladan yang baik dalam mengurus emosi mereka sendiri.",
+            perkataan_sukar: [
+                { perkataan: "Berdaya tahan", maksud: "Mempunyai keupayaan untuk pulih daripada kesukaran." },
+                { perkataan: "Diintegrasikan", maksud: "Digabungkan atau disatukan." },
+                { perkataan: "Ekstrem", maksud: "Keterlaluan atau berada pada tahap yang paling jauh." },
+                { perkataan: "Main peranan", maksud: "Lakonan situasi tertentu untuk tujuan pembelajaran." }
+            ]
         }
     },
     "Stigma Kesihatan Mental: Keengganan untuk mendapatkan bantuan kerana malu atau takut dihakimi.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam terbuka dan salam sokongan. Selamat datang ke forum yang amat penting untuk memecahkan tembok kesenyapan mengenai kesihatan mental.\n\nPENGENALAN ISU: Isu yang akan kita kupas ialah 'Stigma Kesihatan Mental'. Ini merujuk kepada pandangan negatif, prejudis, atau diskriminasi terhadap individu yang mempunyai masalah kesihatan mental, yang menyebabkan ramai yang enggan atau takut untuk mendapatkan bantuan.\n\nLATAR BELAKANG ISU: Stigma ini berpunca daripada kurangnya pemahaman masyarakat mengenai kesihatan mental, salah faham bahawa ia adalah tanda kelemahan peribadi, gambaran negatif dalam media, serta faktor budaya yang mungkin tidak menggalakkan perbincangan terbuka mengenai isu emosi.\n\nKEPENTINGAN ISU: Stigma adalah penghalang utama kepada rawatan dan pemulihan. Ia menyebabkan individu menderita dalam diam, memburukkan keadaan mereka, dan menghalang mereka daripada mencapai potensi penuh. Menghapuskan stigma adalah langkah kritikal ke arah masyarakat yang lebih sihat mental.\n\nSOALAN FOKUS: Persoalan yang ingin saya ajukan: Apakah strategi yang paling berkesan untuk mengurangkan stigma kesihatan mental dalam kalangan pelajar dan masyarakat umum? Bagaimanakah pendidikan dan kempen kesedaran dapat memainkan peranan?",
+            perkataan_sukar: [
+                { perkataan: "Stigma", maksud: "Tanda aib atau malu yang dikaitkan dengan sesuatu; pandangan negatif masyarakat." },
+                { perkataan: "Prejudis", maksud: "Pandangan atau sikap negatif terhadap sesuatu kumpulan tanpa asas yang kukuh." },
+                { perkataan: "Diskriminasi", maksud: "Layanan tidak adil terhadap seseorang berdasarkan ciri-ciri tertentu." },
+                { perkataan: "Kritikal", maksud: "Sangat penting atau genting." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Saudara Pengerusi. Stigma kesihatan mental adalah musuh senyap yang meragut kesejahteraan ramai individu dan ia perlu ditangani secara kolektif.\n\nPENDAPAT: Saya berpendapat bahawa usaha untuk membanteras stigma kesihatan mental memerlukan pendekatan pelbagai peringkat, melibatkan pendidikan awam, perkongsian kisah peribadi daripada individu yang telah pulih, penglibatan media secara positif, dan perubahan dasar.\n\nALASAN: Ini kerana stigma berakar umbi daripada kejahilan dan ketakutan. Dengan meningkatkan pengetahuan dan pemahaman, kita boleh mengubah persepsi negatif. Apabila individu berani berkongsi pengalaman mereka, ia memberi harapan kepada orang lain dan menunjukkan bahawa pemulihan adalah mungkin.\n\nTANGGAPAN: Ada yang mungkin berfikir bahawa isu kesihatan mental adalah perkara peribadi yang tidak patut dibincangkan secara terbuka. Namun, sikap tertutup inilah yang memburukkan stigma dan menghalang orang daripada mencari pertolongan.\n\nRUJUKAN: Kempen-kempen kesedaran kesihatan mental di peringkat global seperti 'Time to Change' atau 'Bell Let's Talk' telah menunjukkan bahawa perbincangan terbuka dan perkongsian cerita dapat membantu mengurangkan stigma dan menggalakkan orang untuk mendapatkan bantuan.\n\nIMPLIKASI: Stigma menyebabkan individu yang mengalami masalah kesihatan mental merasa malu, terasing, dan putus asa. Ia menghalang mereka daripada mendapatkan diagnosis awal dan rawatan, yang boleh membawa kepada keadaan yang lebih kronik dan sukar dirawat.\n\nKESIMPULAN: Kesimpulannya, kita semua bertanggungjawab untuk mewujudkan masyarakat yang lebih prihatin dan kurang menghakimi terhadap isu kesihatan mental. Sekolah boleh menjadi agen perubahan dengan mengintegrasikan pendidikan kesihatan mental dalam kurikulum dan mewujudkan persekitaran yang menyokong. Media juga memainkan peranan besar dalam memberi gambaran yang tepat dan tidak sensasi.",
+            perkataan_sukar: [
+                { perkataan: "Membanteras", maksud: "Menghapuskan atau membasmi." },
+                { perkataan: "Kejahilan", maksud: "Kekurangan pengetahuan atau pemahaman." },
+                { perkataan: "Diagnosis", maksud: "Proses mengenal pasti sesuatu penyakit atau masalah." },
+                { perkataan: "Sensasi", maksud: "Menimbulkan kegemparan atau keterujaan (selalunya secara negatif)." }
+            ]
         }
     },
     "Tekanan Perasaan Akibat Perubahan Hormon: Ketidakstabilan emosi semasa akil baligh.": {
         moderator: {
-            hujah: "SALAM PEMBUKA: ... \n\nPENGENALAN ISU: ... \n\nLATAR BELAKANG ISU: ... \n\nKEPENTINGAN ISU: ... \n\nSOALAN FOKUS: ...",
-            perkataan_sukar: []
+            hujah: "SALAM PEMBUKA: Salam remaja dan salam pemahaman. Selamat datang ke forum yang akan membincangkan satu fasa penting dalam kehidupan pelajar, iaitu perubahan semasa akil baligh.\n\nPENGENALAN ISU: Isu yang akan kita sentuh ialah 'Tekanan Perasaan Akibat Perubahan Hormon'. Ini merujuk kepada ketidakstabilan emosi, perubahan mood, atau sensitiviti yang meningkat yang sering dialami oleh remaja semasa fasa akil baligh akibat perubahan hormon yang ketara.\n\nLATAR BELAKANG ISU: Akil baligh adalah tempoh transisi di mana badan mengalami banyak perubahan fizikal dan hormon. Perubahan hormon ini, seperti peningkatan estrogen dan testosteron, boleh memberi kesan langsung kepada emosi dan tingkah laku remaja.\n\nKEPENTINGAN ISU: Memahami bahawa perubahan emosi ini adalah sebahagian daripada proses perkembangan normal adalah penting. Ia membantu remaja, ibu bapa, dan guru untuk menangani situasi ini dengan lebih baik dan mengelakkan salah faham atau konflik yang tidak perlu.\n\nSOALAN FOKUS: Persoalan untuk kita kupas: Bagaimanakah remaja boleh dibantu untuk memahami dan mengurus perubahan emosi yang berkaitan dengan hormon ini? Apakah peranan orang dewasa dalam menyediakan sokongan dan panduan semasa fasa yang mencabar ini?",
+            perkataan_sukar: [
+                { perkataan: "Akil baligh", maksud: "Peringkat kematangan seksual; baligh." },
+                { perkataan: "Ketidakstabilan emosi", maksud: "Keadaan emosi yang mudah berubah-ubah." },
+                { perkataan: "Hormon", maksud: "Bahan kimia dalam badan yang mengawal pelbagai fungsi, termasuk pertumbuhan dan mood." },
+                { perkataan: "Transisi", maksud: "Peralihan dari satu peringkat ke peringkat lain." }
+            ]
         },
         panelis: {
-            hujah: "PENDAHULUAN PANELIS: ... \n\nPENDAPAT: ... \n\nALASAN: ... \n\nTANGGAPAN: ... \n\nRUJUKAN: ... \n\nIMPLIKASI: ... \n\nKESIMPULAN: ...",
-            perkataan_sukar: []
+            hujah: "PENDAHULUAN PANELIS: Terima kasih Tuan Moderator. Fasa akil baligh adalah satu perjalanan yang unik dan kadangkala bergelora bagi setiap remaja, dan perubahan hormon memainkan peranan besar.\n\nPENDAPAT: Saya berpendapat bahawa pendidikan mengenai perubahan fizikal dan emosi semasa akil baligh, termasuk kesan hormon, perlu diberikan secara komprehensif kepada remaja. Ini dapat membantu mereka menormalkan pengalaman mereka dan mengurangkan rasa keliru atau bimbang.\n\nALASAN: Ini kerana ramai remaja mungkin tidak faham mengapa emosi mereka mudah berubah atau mengapa mereka merasa lebih sensitif. Pengetahuan ini memberi mereka kuasa untuk mengurus perasaan mereka dengan lebih baik dan tahu bila untuk meminta bantuan jika perlu.\n\nTANGGAPAN: Ada yang mungkin menganggap perubahan mood remaja sebagai 'mengada-ada' atau sengaja mencari perhatian. Sikap ini tidak membantu dan boleh membuatkan remaja merasa tidak difahami. Penting untuk kita bersabar dan berempati.\n\nRUJUKAN: Pakar perkembangan remaja menekankan kepentingan komunikasi terbuka antara remaja dan ibu bapa atau orang dewasa yang dipercayai. Menyediakan persekitaran yang selamat untuk remaja meluahkan perasaan tanpa dihakimi adalah kunci.\n\nIMPLIKASI: Jika perubahan emosi ini tidak difahami atau diurus dengan baik, ia boleh membawa kepada konflik dengan keluarga dan rakan, masalah tingkah laku, atau menyumbang kepada masalah kesihatan mental jika terdapat faktor tekanan lain.\n\nKESIMPULAN: Kesimpulannya, sokongan, pemahaman, dan kesabaran adalah amat penting daripada orang dewasa di sekeliling remaja. Pendidikan kesihatan reproduktif dan emosi yang baik di sekolah, serta perbincangan terbuka di rumah, dapat membantu remaja mengharungi fasa ini dengan lebih positif dan sihat.",
+            perkataan_sukar: [
+                { perkataan: "Bergelora", maksud: "Tidak tenang atau penuh dengan pergolakan." },
+                { perkataan: "Menormalkan", maksud: "Menjadikan sesuatu dianggap biasa atau diterima." },
+                { perkataan: "Mengada-ada", maksud: "Berbuat atau berkelakuan dengan cara yang dibuat-buat atau berlebihan." },
+                { perkataan: "Empati", maksud: "Kebolehan untuk memahami dan berkongsi perasaan orang lain." }
+            ]
         }
     }
 });
