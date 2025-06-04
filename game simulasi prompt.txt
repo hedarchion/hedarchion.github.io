@@ -1,0 +1,31 @@
+Create and design an interactive game app to train panels and moderators of a forum in Bahasa Malaysia (Malay).
+
+The goal for moderator is:
+1. To lay out the definition and background of an issue within 1 minute
+
+The goal for panelist is:
+1. To flesh out an argument for or against the issue using the PATRIK framework
+2. The PATRIK framework is:
+P-Pendapat
+A-Alasan
+T-Tanggapan
+R-Rujukan
+I-Implikasi
+K-Kesimpulan
+3. They need to do so in 2 minutes
+
+How the app works:
+1. User put their name and gender and choose their role as panelist or moderator
+2. They are greeted with bunch of cards floating around with themes of issues like pendidikan, sosial, etc.
+3. They choose one.
+4. The envelope opens out (with animation) and reveals the name of the issue (it remains open)
+5. After 30 seconds a countdown starts (according to panelist or moderator role)
+6. Once countdown ends, a ringing bell starts
+7. New screen, a mock moderator or a mock master of ceremony invites the user as text to begin their argument or speech.
+8. Their speaking turn will last with a new countdown as their chosen role
+9. Once the countdown ends, a rating question will appear to grade themselves on a scale of 1-9
+10. Buttons that says: "Contoh Isi" and "Soalan Lain" and "Tamat Simulasi" after they rate themselves
+11. For button "Contoh Isi": it will flesh out examples of arguments that can be made for or against the issue serving as "guides" to the user. Also include meaning of words that are deemed difficult for highschool students.
+12. If the user choose button "Tamat Simulasi", generate a reesult of gameplay overview with small text directing them to screenshot and send the shot to "Cikgu Ashraf".
+13. Button "Soalan Lain" means user wants to play another round and begin starting screen all over again.
+14. Make sure the UI is mobile friendly and has fun and colourful palette.
