@@ -234,8 +234,7 @@
                 </div>
             </div>
             <p class="text-white text-center text-lg mb-2">Masa Persediaan:</p>
-            <div id="prepCountdown" class="countdown-timer text-white mb-8">90</div>
-            <p id="prepMessage" class="text-white text-center text-sm"></p>
+            <div id="prepCountdown" class="countdown-timer text-white mb-8">105</div> <p id="prepMessage" class="text-white text-center text-sm"></p>
         </div>
 
         <div id="speakingTurnScreen" class="screen bg-gradient-to-br from-purple-400 to-pink-600 p-6">
@@ -311,7 +310,7 @@
     </div>
 
     <script>
-        var staticContohIsiData = {}; // Initialize as a global variable
+        var staticContohIsiData = {}; 
     </script>
 
     <script src="hedarchion/hedarchion.github.io/hedarchion.github.io-9d31c9258632768128330804412d9c4a8171ee01/data_pendidikan.js"></script>
@@ -398,8 +397,6 @@
     let prepTimerInterval, speakTimerInterval;
     let bellSound;
 
-    // The allIssues array should contain ALL possible issues from your data files.
-    // Ensure this list is comprehensive and matches the keys in staticContohIsiData.
     const allIssues = [ 
         "Tekanan Akademik: Tekanan tinggi untuk cemerlang dalam peperiksaan (contohnya SPM).",
         "Beban Kerja Sekolah yang Berat: Terlalu banyak kerja rumah dan tugasan sekolah.",
@@ -469,7 +466,6 @@
     ];
     let displayedIssues = [];
 
-
     // --- Utility Functions ---
     function showScreen(screenName) {
         Object.values(screens).forEach(screen => screen.classList.remove('active-screen'));
@@ -484,7 +480,6 @@
                 envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
             }).toDestination();
         }
-        // Ensure Tone.js is ready before playing sound
         if (Tone.context.state !== 'running') {
             Tone.start().then(() => {
                  bellSound.triggerAttackRelease("C5", "8n", Tone.now());
@@ -562,6 +557,7 @@
     }
 
     function startPrepCountdown() {
+        // MODIFIED LINE: Changed prep time from 90 to 105 seconds
         let timeLeft = 105; 
         prepCountdownDisplay.textContent = timeLeft;
         prepMessage.textContent = "Fahami isu dan rancang hujah anda.";
@@ -635,7 +631,7 @@
         contohIsiText.innerHTML = '';
         perkataanSukarList.innerHTML = '';
         perkataanSukarSection.style.display = 'none';
-        contohIsiLoading.style.display = 'none'; // Initially hide, or 'flex' to show if needed
+        contohIsiLoading.style.display = 'none'; 
 
         const issueKey = gameData.currentIssueText;
         const roleKey = gameData.role.toLowerCase(); 
@@ -644,7 +640,6 @@
             const data = staticContohIsiData[issueKey][roleKey];
             let hujahContent = data.hujah || "Tiada contoh hujah tersedia untuk isu ini.";
             
-            // Convert \n to <br> first
             hujahContent = hujahContent.replace(/\n/g, '<br>');
             
             const labelsToBold = [
@@ -653,8 +648,8 @@
             ];
 
             labelsToBold.forEach(label => {
-                const escapedLabel = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special characters in label
-                const regex = new RegExp(`(^|<br>\\s*)(${escapedLabel})`, 'gi'); // Corrected regex
+                const escapedLabel = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(`(^|<br>\\s*)(${escapedLabel})`, 'gi'); 
                 hujahContent = hujahContent.replace(regex, (match, p1, p2) => {
                     return `${p1}<strong class="text-emerald-700">${p2}</strong>`;
                 });
