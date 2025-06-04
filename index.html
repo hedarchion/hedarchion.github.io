@@ -136,7 +136,7 @@
             cursor: pointer;
             margin-top: 15px;
         }
-        .spinner { /* Kept for potential future use, but hidden by default now */
+        .spinner { 
             display: none; 
             border: 4px solid rgba(0, 0, 0, 0.1);
             width: 36px;
@@ -281,7 +281,7 @@
             <div class="bg-white p-8 rounded-lg shadow-md w-full max-h-[90vh] overflow-y-auto">
                 <h2 class="text-2xl font-bold text-emerald-700 mb-6 text-center">Contoh Isi & Perkataan Sukar</h2>
                 <div id="contohIsiContent" class="text-gray-700 space-y-4">
-                    <div id="contohIsiLoading" class="flex justify-center items-center h-32" style="display: none;"> <!-- Spinner is now hidden by default -->
+                    <div id="contohIsiLoading" class="flex justify-center items-center h-32" style="display: none;"> 
                         <div class="spinner"></div>
                         <p class="ml-4 text-emerald-600">Sedang memuatkan contoh...</p>
                     </div>
@@ -321,8 +321,25 @@
         </div>
     </div>
 
-    <!-- Include the static data file BEFORE the main script -->
-    <script src="contoh_isi_data.js"></script> 
+    <!-- Initialize the global data object FIRST -->
+    <script>
+        var staticContohIsiData = {}; // Initialize as a global variable
+    </script>
+
+    <!-- Include the static thematic data files -->
+    <!-- You will create these files (e.g., data_pendidikan.js, data_kesihatan_mental.js) -->
+    <!-- and populate them with the example content for each theme. -->
+    <script src="data_pendidikan.js"></script> 
+    <script src="data_kesihatan_mental.js"></script>
+    <script src="data_sosial_perhubungan.js"></script>
+    <script src="data_teknologi_media.js"></script>
+    <script src="data_kesihatan_fizikal.js"></script>
+    <script src="data_keselamatan.js"></script>
+    <script src="data_pembangunan_diri.js"></script>
+    <script src="data_keluarga_persekitaran.js"></script>
+    <script src="data_kewangan.js"></script>
+    <!-- Add more <script src="data_your_theme.js"></script> lines as needed -->
+
 
 <script>
     // --- DOM Elements ---
@@ -367,7 +384,7 @@
     const tamatSimulasiButton = document.getElementById('tamatSimulasiButton');
 
     const contohIsiContent = document.getElementById('contohIsiContent');
-    const contohIsiLoading = document.getElementById('contohIsiLoading'); // Will be hidden by default
+    const contohIsiLoading = document.getElementById('contohIsiLoading'); 
     const contohIsiText = document.getElementById('contohIsiText');
     const perkataanSukarSection = document.getElementById('perkataanSukarSection');
     const perkataanSukarList = document.getElementById('perkataanSukarList');
@@ -400,7 +417,9 @@
     let prepTimerInterval, speakTimerInterval;
     let bellSound;
 
-    const allIssues = [ // This list should ideally match keys in staticContohIsiData or have a fallback
+    // The allIssues array still defines all possible issues that can be selected.
+    // The example content for these issues will be in the separate thematic JS files.
+    const allIssues = [ 
         "Tekanan Akademik: Tekanan tinggi untuk cemerlang dalam peperiksaan (contohnya SPM).",
         "Beban Kerja Sekolah yang Berat: Terlalu banyak kerja rumah dan tugasan sekolah.",
         "Sistem Pendidikan Berorientasikan Peperiksaan: Fokus yang berlebihan kepada peperiksaan berbanding pembangunan holistik.",
@@ -609,7 +628,7 @@
     });
 
     contohIsiButton.addEventListener('click', () => {
-        loadContohIsi(); // This function is now synchronous
+        loadContohIsi(); 
         showScreen('contohIsi');
     });
 
@@ -623,17 +642,17 @@
         showScreen('overview');
     });
 
-    // UPDATED: loadContohIsi to use static data
     function loadContohIsi() {
         contohIsiText.innerHTML = '';
         perkataanSukarList.innerHTML = '';
         perkataanSukarSection.style.display = 'none';
-        contohIsiLoading.style.display = 'none'; // Hide loading spinner as it's instant
+        contohIsiLoading.style.display = 'none'; 
 
         const issueKey = gameData.currentIssueText;
-        const roleKey = gameData.role.toLowerCase(); // 'moderator' or 'panelis'
+        const roleKey = gameData.role.toLowerCase(); 
 
-        if (staticContohIsiData && staticContohIsiData[issueKey] && staticContohIsiData[issueKey][roleKey]) {
+        // Check if staticContohIsiData is defined (it should be by the included files)
+        if (typeof staticContohIsiData !== 'undefined' && staticContohIsiData[issueKey] && staticContohIsiData[issueKey][roleKey]) {
             const data = staticContohIsiData[issueKey][roleKey];
             let hujahContent = data.hujah || "Tiada contoh hujah tersedia untuk isu ini.";
             hujahContent = hujahContent.replace(/\n/g, '<br>');
@@ -717,7 +736,7 @@
         }
     }
     
-    contohIsiLoading.style.display = 'none'; // Ensure spinner is hidden on load
+    contohIsiLoading.style.display = 'none'; 
     showScreen('userInfo'); 
 
 </script>
